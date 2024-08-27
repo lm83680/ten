@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:ten/style/index.dart';
 
 enum TenAvatarsShape { circle, square }
 
+///头像组件
 class TenAvatar extends StatelessWidget {
   const TenAvatar(
       {required this.size,
@@ -30,12 +32,12 @@ class TenAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(
-        shape == TenAvatarsShape.circle ? size / 2 :  size / 8 ,
+        shape == TenAvatarsShape.circle ? size / 2 : size / 8,
       ),
       child: Container(
         width: size,
         height: size,
-        color: Colors.grey[200],
+        color: TenScheme.primary300,
         child: src != null
             ? Image.network(
                 src!,
