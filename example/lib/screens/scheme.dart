@@ -8,7 +8,7 @@ class ExampleScheme extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: color,
-        borderRadius: const BorderRadius.all(Radius.circular(4))
+        borderRadius:  BorderRadius.circular(4)
       ),
       width: 24,
       height: 24,

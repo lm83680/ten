@@ -21,7 +21,7 @@ class MainApp extends StatelessWidget {
       ExampleSubItem("Extemsion 部件拓展", ExampleExtension())
     ]),
     ExampleItem(title: "基础", subItem: [
-      ExampleSubItem("Button 通用按钮", SizedBox()),
+      ExampleSubItem("Button 通用按钮", ExampleButton()),
       ExampleSubItem("Appbar 导航栏", ExampleTenAppbar()),
       ExampleSubItem("Divider 分割线", ExampleTenDivider()),
     ]),

@@ -23,7 +23,7 @@ class TenCard extends StatelessWidget {
       margin: margin ?? const EdgeInsets.all(16),
       decoration: BoxDecoration(
           color: TenScheme.neutralLight200,
-          borderRadius: const BorderRadius.all(Radius.circular(16))),
+          borderRadius: BorderRadius.circular(16)),
       child: child,
     );
   }

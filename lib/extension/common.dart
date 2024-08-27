@@ -6,9 +6,12 @@ extension WidgetShowExtension on Widget? {
   Widget show() => this ?? const SizedBox();
 }
 
-extension WidgetIntrinsicHeightExtension on Widget {
+extension WidgetCommonExtension on Widget {
   ///自动限制无限高度部件的最大高度，一般包裹Column
   Widget intrinsicHeight() => IntrinsicHeight(child: this);
+
+  ///让一个部件变为可滑动，使用SingleChildScrollView包裹仅此而已
+  Widget scrollView() => SingleChildScrollView(child: this);
 }
 
 extension WidgetListExtensions on List<Widget> {
@@ -22,6 +25,22 @@ extension WidgetListExtensions on List<Widget> {
       if (i < length - 1) {
         result.add(tseparator);
       }
+    }
+    return result;
+  }
+
+  List<Widget> withPadding({double? size,double? horizontal,double? vertical}) {
+    if (isEmpty) return this;
+    horizontal = horizontal ?? size ?? 8;
+    vertical = vertical ?? size ?? 8;
+    List<Widget> result = [];
+    for (var i = 0; i < length; i++) {
+      result.add(
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: horizontal,vertical: vertical),
+          child: this[i],
+        )
+      );
     }
     return result;
   }
