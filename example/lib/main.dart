@@ -18,7 +18,8 @@ class MainApp extends StatelessWidget {
   static List<ExampleItem> list = [
     ExampleItem(title: "非组件", subItem: [
       ExampleSubItem("Scheme 主题", ExampleScheme()),
-      ExampleSubItem("Extemsion 部件拓展", ExampleExtension())
+      ExampleSubItem("Extemsion 部件拓展", ExampleExtension()),
+      ExampleSubItem("Feedback 交互反馈", ExampleFeedBack())
     ]),
     ExampleItem(title: "基础", subItem: [
       ExampleSubItem("Button 通用按钮", ExampleButton()),

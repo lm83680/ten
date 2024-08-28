@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:ten/extension/index.dart';
-import 'package:ten/style/index.dart';
+import 'package:ten/ten.dart';
 
 class FeedbackOptionType {
   final IconData icon;
@@ -22,7 +21,7 @@ class FeedbackOptionType {
 
   //  Success 配置
   FeedbackOptionType.success()
-      : icon = Icons.download_done_rounded,
+      : icon = Icons.check_circle_rounded,
         iconColor = TenScheme.success,
         backgroundColor = TenScheme.successBackGroud;
 
@@ -39,7 +38,7 @@ class FeedbackOptionType {
         backgroundColor = TenScheme.errorBackGroud;
 }
 
-void showRawSnackbar(BuildContext context, String title,
+void showTenSnackbar(BuildContext context, String title,
     {String? message,
     Duration? duration,
     bool? canClose,
@@ -113,4 +112,44 @@ void showRawSnackbar(BuildContext context, String title,
       overlayEntry.remove();
     }
   });
+}
+
+OverlayEntry? _loadingEntry;
+
+void showTenLoading(BuildContext context,
+    {String? message, bool showCard = false}) {
+  if (_loadingEntry != null) throw "请不要让用户或程序重复调用showLoading";
+  OverlayState? overlayState = Overlay.of(context);
+
+  _loadingEntry = OverlayEntry(
+    builder: (context) => Material(
+      color: Colors.transparent,
+      child: Container(
+        color: TenScheme.neutralDark.withOpacity(0.48),
+        child: Center(
+          child: (message == null) && (!showCard)
+              ? const CircularProgressIndicator(color: Colors.white)
+              : TenCard(
+                  child: Padding(
+                  padding:(message == null) ? const EdgeInsets.all(16) : const EdgeInsets.symmetric(vertical: 16, horizontal: 36),
+                  child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        CircularProgressIndicator(color: TenScheme.primary),
+                        if ((message != null)) Text(message)
+                      ].withIntervals(hSize: 24)),
+                )),
+        ),
+      ),
+    ).animate().fadeIn(curve: Curves.decelerate),
+  );
+
+  if (_loadingEntry != null) overlayState.insert(_loadingEntry!);
+}
+
+void hideTenLoading() {
+  if (_loadingEntry != null) {
+    _loadingEntry!.remove();
+    _loadingEntry = null;
+  }
 }

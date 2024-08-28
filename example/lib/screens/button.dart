@@ -11,16 +11,20 @@ class ExampleButton extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const TenSection(name: "一般"),
+          const TenListItem(
+            title: "一般使用方法",
+            subtitle: "目前接受触发onTap和触发onLongPress",
+          ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               TenButton(
                 "primary",
                 onTap: () {
-                  showRawSnackbar(context, "触发按钮",message: "触发onTap");
+                  showTenSnackbar(context, "触发按钮", message: "触发onTap");
                 },
                 onLongPress: () {
-                  showRawSnackbar(context, "触发按钮",message: "触发onLongPress");
+                  showTenSnackbar(context, "触发按钮", message: "触发onLongPress");
                 },
               ),
               TenButtonText("primary text", onTap: () {}),
@@ -28,9 +32,10 @@ class ExampleButton extends StatelessWidget {
                 "primary",
                 onTap: () {},
               ),
-            ].withPadding(),
+            ],
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               TenButton(
                 "lefticon",
@@ -42,17 +47,17 @@ class ExampleButton extends StatelessWidget {
                 righticon: Icon(Icons.balance, color: Colors.white),
                 onTap: () {},
               ),
-            ].withPadding(),
+            ],
           ),
-          Row(
+          const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-            const TenButton("失效"),
-            const TenButtonText("事件为null时颜色配置无效"),
-          ].withPadding()),
+                TenButton("失效"),
+                TenButtonText("事件为null时颜色配置无效"),
+              ]),
           const TenDivider(),
-          const TenSection(name: "类型"),
-          Row(
-              children: [
+          const TenListItem(title: "预设按钮类型"),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
             TenButton.success("成功", onTap: () {}),
             TenButtonText.success("成功", onTap: () {}),
             TenButtonBorder.success("成功", onTap: () {}),
@@ -65,9 +70,8 @@ class ExampleButton extends StatelessWidget {
               ),
               onTap: () {},
             ),
-          ].withPadding()),
-          Row(
-              children: [
+          ]),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
             TenButton.wraning("警告", onTap: () {}),
             TenButtonText.wraning("警告", onTap: () {}),
             TenButtonBorder.wraning("警告", onTap: () {}),
@@ -80,9 +84,8 @@ class ExampleButton extends StatelessWidget {
               ),
               onTap: () {},
             ),
-          ].withPadding()),
-          Row(
-              children: [
+          ]),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
             TenButton.error("危险", onTap: () {}),
             TenButtonText.error("危险", onTap: () {}),
             TenButtonBorder.error("危险", onTap: () {}),
@@ -95,7 +98,7 @@ class ExampleButton extends StatelessWidget {
               ),
               onTap: () {},
             ),
-          ].withPadding()),
+          ]),
           const TenDivider(),
         ].withPadding(vertical: 16),
       ).paddingAll(16).scrollView(),
