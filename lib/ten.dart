@@ -1,5 +1,6 @@
 library ten;
 
+export './function/index.dart';
 export 'extension/index.dart';
 export 'src/appbar.dart';
 export 'src/avatar.dart';

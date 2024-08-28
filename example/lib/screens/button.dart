@@ -16,11 +16,14 @@ class ExampleButton extends StatelessWidget {
             children: [
               TenButton(
                 "primary",
-                onTap: () {print("222");},
+                onTap: () {
+                  showRawSnackbar(context, "触发按钮",message: "触发onTap");
+                },
+                onLongPress: () {
+                  showRawSnackbar(context, "触发按钮",message: "触发onLongPress");
+                },
               ),
-              TenButtonText("primary text", onTap: () {
-                
-              }),
+              TenButtonText("primary text", onTap: () {}),
               TenButtonBorder(
                 "primary",
                 onTap: () {},
