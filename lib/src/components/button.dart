@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ten/extension/index.dart';
-import 'package:ten/style/index.dart';
+import 'package:ten/ten.dart';
 
 class TenButton extends StatelessWidget {
   const TenButton(this.text,
