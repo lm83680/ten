@@ -6,3 +6,4 @@ export './divider.dart';
 export './extension.dart';
 export './feedback.dart';
 export './scheme.dart';
+export './tooltip.dart';

@@ -98,7 +98,7 @@ class _ExampleFeedBackState extends State<ExampleFeedBack> {
                   src: "http://q1.qlogo.cn/g?b=qq&nk=1010365&s=100",
                 ).withLoading(isLoading).withClipRRect(16),
                 TenButton(
-                  isLoading ? "开启" : "关闭",
+                  isLoading ? "关闭" : "开启",
                   onTap: () => setState(() => isLoading = !isLoading),
                 ),
               ],

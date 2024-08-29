@@ -25,6 +25,7 @@ class MainApp extends StatelessWidget {
       ExampleSubItem("Button 通用按钮", ExampleButton()),
       ExampleSubItem("Appbar 导航栏", ExampleTenAppbar()),
       ExampleSubItem("Divider 分割线", ExampleTenDivider()),
+      ExampleSubItem("Tooltip 气泡", ExampleTooltip()),
     ]),
     ExampleItem(title: "容器", subItem: [
       ExampleSubItem("ListItem 横向列表", SizedBox()),
