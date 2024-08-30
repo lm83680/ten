@@ -87,6 +87,8 @@ class TenPopupRoute extends PopupRoute {
 
   @override
   Duration get transitionDuration => _duration;
+  @override
+  Duration get reverseTransitionDuration => Duration.zero;
 }
 
 class TenToolTip extends StatefulWidget {
@@ -94,37 +96,21 @@ class TenToolTip extends StatefulWidget {
       {required this.popKey,
       super.key,
       this.title,
-      this.borderRadius = 16,
       required this.message,
       this.onTap});
   final GlobalKey popKey;
   final String? title;
   final String message;
-  final double borderRadius;
   final GestureTapCallback? onTap;
-  static void showToolTip(context, String message, GlobalKey popKey,
+  static Future<void> showToolTip(context, String message, GlobalKey popKey,
       {String? title,
       GestureTapCallback? onTap,
-      double arrowHeight = 6.0,
-      TextStyle? textStyle =
-          const TextStyle(fontSize: 16, color: Color(0xFFFFFFFF)),
-      Color? backgroundColor = const Color(0xFF1A1A1A),
-      bool hasCloseIcon = false,
-      double offset = 0,
-      Widget? widget,
-      EdgeInsets paddingInsets =
-          const EdgeInsets.only(left: 18, top: 14, right: 18, bottom: 14),
-      double borderRadius = 16,
-      bool canWrap = false,
-      double spaceMargin = 20,
-      double? arrowOffset,
-      VoidCallback? dismissCallback,
-      double turnOverFromBottom = 50.0}) {
+      Offset? offset}) async {
     assert(popKey.currentContext != null &&
         popKey.currentContext!.findRenderObject() != null);
     if (popKey.currentContext == null ||
         popKey.currentContext!.findRenderObject() == null) return;
-    Navigator.push(
+    await Navigator.push(
         context,
         TenPopupRoute(
             child: TenToolTip(
@@ -216,7 +202,7 @@ class _TenToolTipState extends State<TenToolTip> {
         _screenSize.width - 48,
         _screenSize.height // 全屏幕高度
         );
-    debugPrint(childHeight.toString());
+
     return Material(
       color: Colors.transparent,
       child: Stack(
@@ -238,12 +224,12 @@ class _TenToolTipState extends State<TenToolTip> {
           Positioned.fromRect(
               rect: tipshowRect,
               child: GestureDetector(
-                  onTap: widget.onTap,
+                  onTap: widget.onTap ?? () => Navigator.pop(context),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Container(
-                        key: _key,
+                          key: _key,
                           decoration: BoxDecoration(
                             color: TenScheme.neutralDark,
                             borderRadius: BorderRadius.circular(16),

@@ -14,7 +14,7 @@ class _ExampleTooltipState extends State<ExampleTooltip> {
   final GlobalKey _key3 = GlobalKey();
   final GlobalKey _key4 = GlobalKey();
   void _toggleTooltip(GlobalKey key) {
-    TenToolTip.showToolTip(context, "这是常见使用方法，点击气泡外任意点关闭气泡，点击气泡也能触发对应回调", key,
+    TenToolTip.showToolTip(context, "这是常见使用方法，点击气泡外任意点关闭气泡，点击气泡也能触发对应回调这是常见使用方法，点击气泡外任意点关闭气泡，点击气泡也能触发对应回调", key,
         title: "一般方法", onTap: () {
       showTenSnackbar(context, "点击了气泡");
     });
