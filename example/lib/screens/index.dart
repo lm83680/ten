@@ -2,6 +2,7 @@ library screens;
 
 export './appbar.dart';
 export './button.dart';
+export './card.dart';
 export './divider.dart';
 export './extension.dart';
 export './feedback.dart';

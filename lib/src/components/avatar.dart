@@ -32,7 +32,7 @@ class TenAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(
-        shape == TenAvatarsShape.circle ? size / 2 : size / 8,
+         (shape == TenAvatarsShape.circle ? size / 2 : size / 8),
       ),
       child: Container(
         width: size,

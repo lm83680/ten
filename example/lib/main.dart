@@ -30,6 +30,7 @@ class MainApp extends StatelessWidget {
     ]),
     ExampleItem(title: "容器", subItem: [
       ExampleSubItem("ListItem 横向列表", ExampleListItem()),
+      ExampleSubItem("Card 卡片", ExampleCard()),
     ])
   ];
 
