@@ -30,8 +30,7 @@ class TenButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     BorderRadius radius = BorderRadius.circular(12);
-    EdgeInsetsGeometry padding =
-        const EdgeInsets.symmetric(horizontal: 16, vertical: 8);
+    EdgeInsetsGeometry padding = const EdgeInsets.symmetric(horizontal: 16, vertical: 8);
 
     return ClipRRect(
         borderRadius: radius,

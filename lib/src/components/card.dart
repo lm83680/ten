@@ -76,3 +76,79 @@ class TenCardPreset extends StatelessWidget {
     );
   }
 }
+
+class TenCardPreset2 extends StatelessWidget {
+  const TenCardPreset2(
+      {super.key,
+      this.margin,
+      required this.title,
+      this.subtitle,
+      required this.backgorund,
+      this.aspectRatio = 3/2,
+      this.bottom, this.description, this.tag});
+  final String title;
+  final String? subtitle;
+  final Widget backgorund;
+  final Widget? bottom;
+  final EdgeInsets? margin;
+  final double aspectRatio;
+  final String? description;
+  final Widget? tag;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: margin ?? const EdgeInsets.all(16),
+      clipBehavior: Clip.antiAlias,
+      decoration: BoxDecoration(
+          color: TenScheme.neutralLight200,
+          borderRadius: BorderRadius.circular(16)),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          AspectRatio(
+            aspectRatio: aspectRatio,
+            child: Stack(
+              children: [
+                SizedBox.expand(child: backgorund),
+                // 渐变遮罩层
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: Container(
+                    height: 60,
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Colors.black, Colors.transparent], // 黑色到透明的渐变
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
+                      ),
+                    ),
+                  ),
+                ),
+               Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: DefaultTextStyle(
+                  style:const TextStyle(color: Colors.white),
+                  child: TenListItem(
+                    title: title,
+                    subtitle: subtitle,
+                    maxLines: 1,
+                  ),
+                )),
+                if(tag!=null) Positioned(
+                  top: 16,
+                  right: 16,
+                  child: tag!)
+              ],
+            ),
+          ),
+          if(description!=null) Text(description!).padding(left: 16,right: 16,top: 16),
+          if (bottom != null) bottom!.padding(left: 4, right: 16).paddingAll(16)
+        ],
+      ),
+    );
+  }
+}

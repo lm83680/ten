@@ -12,6 +12,7 @@ class ExampleCard extends StatelessWidget {
       ),
       body: Column(
         children: [
+          const TenSection(notation: Text("#"), name: "默认"),
           const TenCard(
             child: TenListItem(
               title: "默认",
@@ -26,15 +27,52 @@ class ExampleCard extends StatelessWidget {
               )
             ],
           ),
-          const TenSection(notation: Text("#"), name: "预设:"),
+          const TenSection(notation: Text("#"), name: "预设"),
           TenCardPreset(
-            leading:Image.network("http://q1.qlogo.cn/g?b=qq&nk=2436381839&s=100"),
-            title: "云南优质茶叶",
-            subtitle: "预设卡片，常用于商品、联系人卡片",
-            trailing:TenButtonBorder.wraning("加购",lefticon: Icon(Icons.shopping_cart_outlined),)
-          ),
+              leading: Image.network(
+                  "http://q1.qlogo.cn/g?b=qq&nk=2436381839&s=100"),
+              title: "TenCardPreset",
+              subtitle: "预设卡片，常用于商品、联系人卡片",
+              trailing: TenButtonBorder(
+                "加购",
+                lefticon: Icon(
+                  Icons.shopping_cart_outlined,
+                  color: TenScheme.primary,
+                ),
+                onTap: () {},
+              )),
+          TenCardPreset2(
+              backgorund: Image.network(
+                  "https://images.pexels.com/photos/15352968/pexels-photo-15352968.jpeg?auto=compress&cs=tinysrgb&w=400",
+                  fit: BoxFit.fill),
+              aspectRatio: 7 / 4,
+              title: "TenCardPreset2",
+              subtitle: "预设卡片`TenCardPreset2`，常用于商品、文章、活动卡片",
+              description: "这是一段附加的文字描述，你可以设置aspectRatio控制图像的比例",
+              tag: TenTag("热卖榜 NO.1",backgorundColor: Color(0XFFDD3333),plain: true,),
+              bottom: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TenButtonBorder(
+                    "加购",
+                    lefticon: Icon(
+                      Icons.shopping_cart_outlined,
+                      color: TenScheme.primary,
+                    ),
+                    onTap: () {},
+                  ),
+                  TenButton(
+                    "立即下单",
+                    lefticon: Icon(
+                      Icons.shopping_bag_outlined,
+                      color: Colors.white,
+                    ),
+                    onTap: () {},
+                  )
+                ].withIntervals(wSize: 16),
+              )),
         ],
-      ),
+      ).scrollView(),
     );
   }
 }

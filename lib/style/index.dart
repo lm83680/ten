@@ -34,8 +34,7 @@ class TenScheme {
       const TextStyle(fontSize: 10, fontWeight: FontWeight.w600);
 
   /// 描述
-  static TextStyle desction =
-      const TextStyle(fontSize: 12, color: Color(0xff71727a));
+  static TextStyle desction = const TextStyle(fontSize: 12, color: Color(0xff71727a));
 
   //主题色
   static Color primary = const Color(0xff006ffd);

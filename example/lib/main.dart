@@ -32,7 +32,10 @@ class MainApp extends StatelessWidget {
     ExampleItem(title: "容器", subItem: [
       ExampleSubItem("ListItem 横向列表", ExampleListItem()),
       ExampleSubItem("Card 卡片", ExampleCard()),
-    ])
+    ]),
+    ExampleItem(title: "内容", subItem: [
+      ExampleSubItem("Tag 标签", ExampleTag()),
+    ]),
   ];
 
   @override
