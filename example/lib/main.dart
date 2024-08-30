@@ -24,7 +24,6 @@ class MainApp extends StatelessWidget {
     ]),
     ExampleItem(title: "基础", subItem: [
       ExampleSubItem("Button 通用按钮", ExampleButton()),
-      ExampleSubItem("Appbar 导航栏", ExampleTenAppbar()),
       ExampleSubItem("Divider 分割线", ExampleTenDivider()),
       ExampleSubItem("Tooltip 气泡", ExampleTooltip()),
       ExampleSubItem("Guide 引导", ExampleGuide()),
@@ -32,6 +31,9 @@ class MainApp extends StatelessWidget {
     ExampleItem(title: "容器", subItem: [
       ExampleSubItem("ListItem 横向列表", ExampleListItem()),
       ExampleSubItem("Card 卡片", ExampleCard()),
+    ]),
+    ExampleItem(title: "导航栏", subItem: [
+      ExampleSubItem("Appbar 导航栏", ExampleTenAppbar()),
     ]),
     ExampleItem(title: "内容", subItem: [
       ExampleSubItem("Tag 标签", ExampleTag()),

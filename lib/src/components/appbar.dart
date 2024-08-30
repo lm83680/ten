@@ -37,13 +37,24 @@ class TenAppBar extends StatelessWidget implements PreferredSizeWidget {
           ? null
           : backText != null
               ? TextButton(
+                  style: ButtonStyle(
+                    overlayColor: WidgetStateProperty.resolveWith<Color?>(
+                      (Set<WidgetState> states) {
+                        if (states.contains(WidgetState.pressed)) {
+                          return TenScheme.primary300Opacity; // 按下时的涟漪颜色
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
                   onPressed: () => Navigator.pop(context),
                   child: Text(
                     backText!,
-                    style: TextStyle(color: TenScheme.primary),
+                    style: TenScheme.actionM.copyWith(color: TenScheme.primary),
                   ))
               : canPop
                   ? IconButton(
+                      highlightColor: TenScheme.primary300,
                       onPressed: () => Navigator.pop(context),
                       icon: const Icon(Icons.navigate_before_rounded))
                   : null,
