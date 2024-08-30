@@ -29,7 +29,7 @@ class MainApp extends StatelessWidget {
       ExampleSubItem("Guide 引导", ExampleGuide()),
     ]),
     ExampleItem(title: "容器", subItem: [
-      ExampleSubItem("ListItem 横向列表", SizedBox()),
+      ExampleSubItem("ListItem 横向列表", ExampleListItem()),
     ])
   ];
 

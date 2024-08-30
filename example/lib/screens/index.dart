@@ -6,5 +6,6 @@ export './divider.dart';
 export './extension.dart';
 export './feedback.dart';
 export './guide.dart';
+export './list_item.dart';
 export './scheme.dart';
 export './tooltip.dart';
