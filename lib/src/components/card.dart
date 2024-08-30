@@ -6,9 +6,13 @@ class TenCard extends StatelessWidget {
 
   // 命名构造函数
   TenCard.column(
-      {required List<Widget> children,crossAxisAlignment, this.padding, this.margin, super.key})
+      {required List<Widget> children,
+      crossAxisAlignment,
+      this.padding,
+      this.margin,
+      super.key})
       : child = Column(
-          crossAxisAlignment: crossAxisAlignment??CrossAxisAlignment.center,
+          crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: children,
         );
@@ -18,13 +22,14 @@ class TenCard extends StatelessWidget {
   final EdgeInsets? margin;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: padding ?? const EdgeInsets.all(16),
-      margin: margin ?? const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-          color: TenScheme.neutralLight200,
-          borderRadius: BorderRadius.circular(16)),
-      child: child,
-    );
+    return Padding(
+        padding: margin ?? const EdgeInsets.all(16),
+        child: Ink(
+          padding: padding ?? const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+              color: TenScheme.neutralLight200,
+              borderRadius: BorderRadius.circular(16)),
+          child: child,
+        ));
   }
 }

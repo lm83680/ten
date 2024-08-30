@@ -31,6 +31,9 @@ class ExampleTenDivider extends StatelessWidget {
               TenListItem(
                   maxLines: 5,
                   title: "vertical 为真时 竖向渲染",
+                  onTap: () {
+                    
+                  },
                   subtitle:
                       "Row 通常不会自动限高，所以你需要在Row外层使用IntrinsicHeight 包裹限高，Ten 已经为你拓展了这个函数，对Row使用.intrinsicHeight()即可"),
               Row(

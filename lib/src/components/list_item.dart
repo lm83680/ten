@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:ten/ten.dart';
 
 /// 仿写 ListTile , 仅保留常用的属性, 为了保持布局达到预期（顶中中），继承StatefulWidget用于计算部件
-///
-/// 若你的 ListTile 布局可接受 前中后段均居中的布局，尝试调用[TenListItemStl]
 class TenListItem extends StatefulWidget {
   const TenListItem(
       {this.leading,
@@ -54,9 +52,18 @@ class _TenListItemState extends State<TenListItem> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: widget.onTap,
       onLongPress: widget.onLongPress,
+      overlayColor: WidgetStateProperty.resolveWith<Color?>(
+        (Set<WidgetState> states) {
+          if (states.contains(WidgetState.pressed)) {
+            return TenScheme.primary300.withOpacity(0.88); // 按下时的涟漪颜色
+          }
+          return null;
+        },
+      ),
+      borderRadius: BorderRadius.circular(12),
       child: Container(
         color: Colors.transparent,
         padding: const EdgeInsets.all(16),
@@ -86,66 +93,6 @@ class _TenListItemState extends State<TenListItem> {
                   ),
                 ),
                 if (widget.trailing != null) widget.trailing!.padding(left: 16),
-              ],
-            )),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-///继承自StatelessWidget的ListTile，去掉计算开销，布局均居中
-class TenListItemStl extends StatelessWidget {
-  const TenListItemStl(
-      {this.leading,
-      required this.title,
-      this.subtitle,
-      this.trailing,
-      this.maxLines = 3,
-      this.onTap,
-      this.onLongPress,
-      super.key});
-  final Widget? leading;
-  final String title;
-  final String? subtitle;
-  final Widget? trailing;
-  final int maxLines;
-  final GestureTapCallback? onTap;
-  final GestureLongPressCallback? onLongPress;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      onLongPress: onLongPress,
-      child: Container(
-        color: Colors.transparent,
-        padding: const EdgeInsets.all(16),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            if (leading != null) leading!.padding(right: 16),
-            Expanded(
-                child: Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(title, style: TenScheme.action),
-                      if (subtitle != null)
-                        Text(
-                          subtitle!,
-                          softWrap: true, // 允许换行
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: maxLines,
-                          style: TenScheme.desction,
-                        ).padding(top: 4)
-                    ],
-                  ),
-                ),
-                if (trailing != null) trailing!.padding(left: 16),
               ],
             )),
           ],
