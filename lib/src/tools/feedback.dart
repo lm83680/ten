@@ -118,7 +118,7 @@ OverlayEntry? _loadingEntry;
 
 void showTenLoading(BuildContext context,
     {String? message, bool showCard = false}) {
-  if (_loadingEntry != null) throw "请不要让用户或程序重复调用showLoading";
+  if (_loadingEntry != null) debugPrint("请不要让用户或程序重复调用showLoading");
   OverlayState? overlayState = Overlay.of(context);
 
   _loadingEntry = OverlayEntry(

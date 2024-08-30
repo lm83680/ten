@@ -58,7 +58,7 @@ class _TenListItemState extends State<TenListItem> {
       overlayColor: WidgetStateProperty.resolveWith<Color?>(
         (Set<WidgetState> states) {
           if (states.contains(WidgetState.pressed)) {
-            return TenScheme.primary300.withOpacity(0.88); // 按下时的涟漪颜色
+            return TenScheme.primary300Opacity; // 按下时的涟漪颜色
           }
           return null;
         },

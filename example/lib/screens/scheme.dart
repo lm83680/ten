@@ -4,12 +4,10 @@ import 'package:ten/ten.dart';
 class ExampleScheme extends StatelessWidget {
   const ExampleScheme({super.key});
 
-  Widget colorBlock(Color color){
+  Widget colorBlock(Color color) {
     return Container(
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius:  BorderRadius.circular(4)
-      ),
+      decoration:
+          BoxDecoration(color: color, borderRadius: BorderRadius.circular(4)),
       width: 24,
       height: 24,
     );
@@ -20,38 +18,75 @@ class ExampleScheme extends StatelessWidget {
     return Scaffold(
       appBar: const TenAppBar(title: "主题"),
       body: SingleChildScrollView(
-        child:TenCard.column(
+          child: TenCard.column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              TenButton(
+                "尝试更改主题",
+                onTap: () {
+                  TenScheme().setScheme(Colors.orangeAccent);
+                  showTenSnackbar(context, "设置成功",
+                      type: FeedbackOptionType.success());
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => ExampleScheme()),
+                  );
+                },
+              ),
+              TenButton(
+                "恢复默认",
+                onTap: () {
+                  TenScheme().setScheme(Color(0xff006ffd));
+                  showTenSnackbar(context, "设置成功",
+                      type: FeedbackOptionType.success());
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => ExampleScheme()),
+                  );
+                },
+              ),
+            ],
+          ).padding(bottom: 16),
           TenListItem(
-            title: "使用频率",
-            subtitle: "右侧数值统计对应在包内被调用的次数",
+            title: "全局性",
+            subtitle:
+                "在任意点调用TenScheme().setScheme(Color) 都能生成新的配色，但Ten库主要依赖primary，其余配色暂不支持修改，也不建议修改",
           ),
-          const TenSection(notation: Text("1"), name: "主题").padding(left: 16,top: 24,bottom: 16),
+          const TenSection(notation: Text("1"), name: "主题")
+              .padding(left: 16, top: 24, bottom: 16),
           TenListItem(
             title: "primary",
             leading: colorBlock(TenScheme.primary),
             subtitle: "组件的主要色",
-            trailing: Text("16",style: TenScheme.desction),
           ),
           TenListItem(
             title: "primary50",
             leading: colorBlock(TenScheme.primary50),
+            subtitle: "一般不需要这个颜色，可以作为主色的协调色",
           ),
           TenListItem(
             title: "primary100",
             leading: colorBlock(TenScheme.primary100),
+            subtitle: "一般也不需要这个颜色，可以作为主色的协调色",
           ),
           TenListItem(
             title: "primary200",
             leading: colorBlock(TenScheme.primary200),
+            subtitle: "需要展示主题色但需要弱化存在感时使用",
           ),
           TenListItem(
             title: "primary300",
             leading: colorBlock(TenScheme.primary300),
-            subtitle: "一般用作于带主题的背景色",
+            subtitle: "一般用作于带主题的背景色，例如空组件的背景色、注意，这个颜色是不具有透明度的",
           ),
-          const TenSection(notation: Text("2"), name: "中性色").padding(left: 16,top: 24,bottom: 16),
+          TenListItem(
+            title: "primaryOpacity",
+            leading: colorBlock(TenScheme.primary300Opacity),
+            subtitle: "作为涟漪色，该色值是primary200.withOpacity(0.4)，注意，这个颜色是具有透明度的，所以才可以作为涟漪色",
+          ),
+          const TenSection(notation: Text("2"), name: "中性色")
+              .padding(left: 16, top: 24, bottom: 16),
           TenListItem(
             title: "neutralLight",
             leading: colorBlock(TenScheme.neutralLight),
@@ -68,7 +103,8 @@ class ExampleScheme extends StatelessWidget {
             title: "neutralLight200",
             leading: colorBlock(TenScheme.neutralLight200),
           ),
-          const TenSection(notation: Text("3"), name: "中性色Dark").padding(left: 16,top: 24,bottom: 16),
+          const TenSection(notation: Text("3"), name: "中性色Dark")
+              .padding(left: 16, top: 24, bottom: 16),
           TenListItem(
             title: "neutralDark",
             leading: colorBlock(TenScheme.neutralDark),
@@ -85,42 +121,49 @@ class ExampleScheme extends StatelessWidget {
             title: "neutralDark200",
             leading: colorBlock(TenScheme.neutralDark200),
           ),
-          const TenSection(notation: Text("4"), name: "文字").padding(left: 16,top: 24,bottom: 16),
+          const TenSection(notation: Text("4"), name: "文字")
+              .padding(left: 16, top: 24, bottom: 16),
           TenListItem(
             title: "h1",
-            leading: Text("h1",style: TenScheme.h1,),
+            leading: Text(
+              "h1",
+              style: TenScheme.h1,
+            ),
           ),
           TenListItem(
             title: "h2",
-            leading: Text("h2",style: TenScheme.h2),
+            leading: Text("h2", style: TenScheme.h2),
           ),
           TenListItem(
             title: "h3",
-            leading: Text("h3",style: TenScheme.h3),
+            leading: Text("h3", style: TenScheme.h3),
           ),
           TenListItem(
             title: "h4",
-            leading: Text("h4",style: TenScheme.h4),
+            leading: Text("h4", style: TenScheme.h4),
           ),
           TenListItem(
             title: "action",
-            leading: Text("action",style: TenScheme.action,),
+            leading: Text(
+              "action",
+              style: TenScheme.action,
+            ),
           ),
           TenListItem(
             title: "actionM",
-            leading: Text("actionM",style: TenScheme.actionM),
+            leading: Text("actionM", style: TenScheme.actionM),
           ),
           TenListItem(
             title: "actionS",
-            leading: Text("actionS",style: TenScheme.actionS),
+            leading: Text("actionS", style: TenScheme.actionS),
           ),
           TenListItem(
             title: "caption",
-            leading: Text("caption",style: TenScheme.caption),
+            leading: Text("caption", style: TenScheme.caption),
           ),
           TenListItem(
             title: "desction",
-            leading: Text("desction",style: TenScheme.desction),
+            leading: Text("desction", style: TenScheme.desction),
           ),
         ].withSeparator(),
       )),

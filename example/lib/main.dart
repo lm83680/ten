@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ten/ten.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MaterialApp(
     theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
@@ -47,7 +48,8 @@ class MainApp extends StatelessWidget {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TenSection(notation: Text("$index"), name: item.title).padding(left: 16,top: 24),
+                  TenSection(notation: Text("$index"), name: item.title)
+                      .padding(left: 16, top: 24),
                   TenCard(
                     child: Column(
                       children: item.subItem
