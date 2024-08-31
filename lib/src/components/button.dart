@@ -44,7 +44,10 @@ class TenButton extends StatelessWidget {
                   color: onTap == null && onLongPress == null
                       ? TenScheme.neutralLight
                       : backgorundColor ?? TenScheme.primary,
-                  child: Row(
+                  child:IconTheme(data: IconThemeData(
+          color: TenScheme.primary,
+          size: 16
+        ), child: Row(
                     children: [
                       if (lefticon != null) lefticon!.padding(right: 8),
                       Text(text,
@@ -53,7 +56,7 @@ class TenButton extends StatelessWidget {
                       if (righticon != null) righticon!.padding(left: 8),
                     ],
                   ),
-                ))));
+                )))));
   }
 }
 
@@ -101,14 +104,17 @@ class TenButtonBorder extends StatelessWidget {
         decoration: BoxDecoration(
             border: Border.all(color: color.withOpacity(0.6), width: 1),
             borderRadius: radius),
-        child: Row(
+        child: IconTheme(data: IconThemeData(
+          color: TenScheme.primary,
+          size: 14
+        ), child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             if (lefticon != null) lefticon!.padding(right: 8),
             Text(text, style: TenScheme.actionM.copyWith(color: color)),
             if (righticon != null) righticon!.padding(left: 8),
           ],
-        ),
+        )),
       ),
     );
   }

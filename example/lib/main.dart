@@ -28,6 +28,9 @@ class MainApp extends StatelessWidget {
       ExampleSubItem("Tooltip 气泡", ExampleTooltip()),
       ExampleSubItem("Guide 引导", ExampleGuide()),
     ]),
+    ExampleItem(title: "表单", subItem: [
+      ExampleSubItem("From 表单", ExampleFrom()),
+    ]),
     ExampleItem(title: "容器", subItem: [
       ExampleSubItem("ListItem 横向列表", ExampleListItem()),
       ExampleSubItem("Card 卡片", ExampleCard()),

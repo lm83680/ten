@@ -11,4 +11,5 @@ export './list_item.dart';
 export './scheme.dart';
 export './tooltip.dart';
 export './tag.dart';
+export './from.dart';
 export './tabs.dart';
