@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:ten/ten.dart';
 
+///Tile 系列 
+///包含基本的 ListITile、 CheckboxListTile、 RadioListTile、SwitchListTile、ExpansionTile
+
+
 /// 仿写 ListTile , 仅保留常用的属性, 为了保持布局达到预期（顶中中），继承StatefulWidget用于计算部件
-class TenListItem extends StatefulWidget {
-  const TenListItem(
+/// 
+/// CheckboxListTile、 RadioListTile、SwitchListTile 都将依赖此部件
+class TenListITile extends StatefulWidget {
+  const TenListITile(
       {this.leading,
       required this.title,
       this.subtitle,
@@ -21,10 +27,10 @@ class TenListItem extends StatefulWidget {
   final GestureLongPressCallback? onLongPress;
 
   @override
-  State<TenListItem> createState() => _TenListItemState();
+  State<TenListITile> createState() => _TenListITileState();
 }
 
-class _TenListItemState extends State<TenListItem> {
+class _TenListITileState extends State<TenListITile> {
   ///如果左侧图标高度大于文字高度，将使用居中布局
   final GlobalKey _key1 = GlobalKey();
   final GlobalKey _key2 = GlobalKey();

@@ -32,8 +32,9 @@ class MainApp extends StatelessWidget {
       ExampleSubItem("ListItem 横向列表", ExampleListItem()),
       ExampleSubItem("Card 卡片", ExampleCard()),
     ]),
-    ExampleItem(title: "导航栏", subItem: [
+    ExampleItem(title: "导航", subItem: [
       ExampleSubItem("Appbar 导航栏", ExampleTenAppbar()),
+      ExampleSubItem("Tabs 标签页", ExampleTabs()),
     ]),
     ExampleItem(title: "内容", subItem: [
       ExampleSubItem("Tag 标签", ExampleTag()),
@@ -59,7 +60,7 @@ class MainApp extends StatelessWidget {
                     child: Column(
                       children: item.subItem
                           .map((subElement) {
-                            return TenListItem(
+                            return TenListITile(
                                 onTap: () => Navigator.of(context).push(
                                       MaterialPageRoute(
                                         builder: (context) => subElement.page,

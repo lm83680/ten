@@ -23,7 +23,7 @@ class _ExampleTooltipState extends State<ExampleTooltip> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const TenAppBar(title: "气泡"),
+        appBar: TenAppBar(title: "气泡"),
         floatingActionButton: FloatingActionButton(
             key: _key4,
             onPressed: () => _toggleTooltip(_key4),

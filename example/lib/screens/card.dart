@@ -7,21 +7,21 @@ class ExampleCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const TenAppBar(
+      appBar: TenAppBar(
         title: "卡片",
       ),
       body: Column(
         children: [
           const TenSection(notation: Text("#"), name: "默认"),
           const TenCard(
-            child: TenListItem(
+            child: TenListITile(
               title: "默认",
               subtitle: "默认情况下 Card 接受一个 child",
             ),
           ),
           TenCard.column(
             children: const [
-              TenListItem(
+              TenListITile(
                 title: "常用.column扩展函数",
                 subtitle: "使用.column扩展函数,会使用 card > cloumn 渲染",
               )

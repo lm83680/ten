@@ -12,7 +12,7 @@ class ExampleListItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const TenSection(notation: Text("#"), name: "一般"),
-            TenListItem(
+            TenListITile(
               title: "仿写 ListTile",
               subtitle:
                   "采用 顶中中 的布局，用户体验感更优采用 顶中中 的布局，用户体验感更优采用 顶中中 的布局，用户体验感更优",
@@ -32,8 +32,8 @@ class ExampleListItem extends StatelessWidget {
               ),
             ),
 
-            TenListItem(
-              title: "无 leading 的TenListItem",
+            TenListITile(
+              title: "无 leading 的TenListITile",
               trailing: IconButton(
                 icon: Icon(
                   Icons.navigate_next_rounded,
@@ -42,9 +42,9 @@ class ExampleListItem extends StatelessWidget {
                 onPressed: () => {},
               ),
             ),
-            TenListItem(
-              title: "无 trailing 的TenListItem",
-              subtitle: "无 trailing 的TenListItem",
+            TenListITile(
+              title: "无 trailing 的TenListITile",
+              subtitle: "无 trailing 的TenListITile",
               leading: IconButton(
                 icon: Icon(
                   Icons.ice_skating,
@@ -54,9 +54,9 @@ class ExampleListItem extends StatelessWidget {
               ),
             ),
             const TenSection(notation: Text("#"), name: "事件"),
-                        TenListItem(
-              title: "无 subtitle 的TenListItem",
-              subtitle: "TenListItem 仅支持 点按 和 长按 事件",
+                        TenListITile(
+              title: "无 subtitle 的TenListITile",
+              subtitle: "TenListITile 仅支持 点按 和 长按 事件",
               onTap: () => {
                 showTenSnackbar(context,"点按",type: FeedbackOptionType.success())
               },

@@ -65,7 +65,7 @@ class TenCardPreset extends StatelessWidget {
             child: leading,
           ).intrinsicHeight(),
           Expanded(
-              child: TenListItem(
+              child: TenListITile(
             title: title,
             subtitle: subtitle,
             maxLines: 2,
@@ -132,7 +132,7 @@ class TenCardPreset2 extends StatelessWidget {
                   right: 0,
                   child: DefaultTextStyle(
                   style:const TextStyle(color: Colors.white),
-                  child: TenListItem(
+                  child: TenListITile(
                     title: title,
                     subtitle: subtitle,
                     maxLines: 1,

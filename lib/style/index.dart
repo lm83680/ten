@@ -19,7 +19,7 @@ class TenScheme {
   static TextStyle h4 =
       const TextStyle(fontSize: 14, fontWeight: FontWeight.w800);
 
-  /// 活动的 / 希望被关注到文字的 / [TenListItem]的标题
+  /// 活动的 / 希望被关注到文字的 / [TenListITile]的标题
   static TextStyle action =
       const TextStyle(fontSize: 14, fontWeight: FontWeight.w600);
   static TextStyle actionL =

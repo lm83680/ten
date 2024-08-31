@@ -7,28 +7,28 @@ class ExampleTenDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const TenAppBar(title: "TenDivider 分割线"),
+      appBar: TenAppBar(title: "TenDivider 分割线"),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TenCard.column(children: const [
-            TenListItem(title: "mtop 和 mbotton 控制上下距离"),
+            TenListITile(title: "mtop 和 mbotton 控制上下距离"),
             TenDivider(
               mtop: 24,
               mbottom: 60,
             ),
-            TenListItem(title: "indent 控制左右边距"),
+            TenListITile(title: "indent 控制左右边距"),
             TenDivider(
               indent: 24,
             ),
-            TenListItem(title: "thickness 自定义厚度"),
+            TenListITile(title: "thickness 自定义厚度"),
             TenDivider(
               thickness: 6,
             ),
           ]),
           TenCard.column(
             children: [
-              TenListItem(
+              TenListITile(
                   maxLines: 5,
                   title: "vertical 为真时 竖向渲染",
                   onTap: () {
@@ -50,7 +50,7 @@ class ExampleTenDivider extends StatelessWidget {
           ),
           TenCard.column(
             children: [
-              TenListItem(title: "自定义颜色"),
+              TenListITile(title: "自定义颜色"),
               TenDivider(
                 color: TenScheme.error,
                 indent: 24,

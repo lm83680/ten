@@ -47,7 +47,7 @@ class _ExampleGuideState extends State<ExampleGuide> {
               key: _key,
               onTap: () => _toggleTooltip(),
             ).intrinsicWidth(),
-            TenListItem(
+            TenListITile(
               title: "你可能发现了，引导实际上是链式调用Tooltip",
               subtitle: "showToolTip 是一个Future<void> 函数，意味着你可以使用await让程序等待ToolTip被销毁",
               leading: IconButton(
@@ -66,7 +66,7 @@ class _ExampleGuideState extends State<ExampleGuide> {
                 onPressed: () => {},
               ),
             ),
-            TenListItem(
+            TenListITile(
               title: "添加步进",
               maxLines: 4,
               subtitle: "在 showToolTip 的内容文字末尾 嵌入 \\n 换行后，写入当前步，注意showToolTip 默认最大3行，如需要请确保预留一行",
@@ -86,7 +86,7 @@ class _ExampleGuideState extends State<ExampleGuide> {
                 onPressed: () => {},
               ),
             ),
-            TenListItem(
+            TenListITile(
               title: "tooltip自动定位目标所在的位置",
               trailing: IconButton(
                 icon: Icon(

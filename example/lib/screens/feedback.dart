@@ -14,11 +14,11 @@ class _ExampleFeedBackState extends State<ExampleFeedBack> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const TenAppBar(title: "交互反馈"),
+      appBar: TenAppBar(title: "交互反馈"),
       body: TenCard.column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const TenListItem(title: "rawSnackbar 横幅提醒"),
+            const TenListITile(title: "rawSnackbar 横幅提醒"),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -53,7 +53,7 @@ class _ExampleFeedBackState extends State<ExampleFeedBack> {
                 )
               ],
             ).intrinsicHeight(),
-            const TenListItem(
+            const TenListITile(
               title: "showTenLoading() 全屏幕加载状态",
               subtitle: "发起一个全屏幕的遮罩，一般用于网络请求时，必须手动使用hideTenLoading()关闭",
             ).padding(top: 24),
@@ -86,7 +86,7 @@ class _ExampleFeedBackState extends State<ExampleFeedBack> {
                 )
               ],
             ),
-            const TenListItem(
+            const TenListITile(
               title: ".withLoading(bool) 让一个部件进入loading状态",
               subtitle: "直接对Widget使用 .withLoading(bool)",
             ).padding(top: 24),

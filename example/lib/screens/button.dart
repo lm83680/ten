@@ -7,11 +7,11 @@ class ExampleButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const TenAppBar(title: "通用按钮"),
+      appBar: TenAppBar(title: "通用按钮"),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const TenListItem(
+          const TenListITile(
             title: "一般使用方法",
             subtitle: "目前接受触发onTap和触发onLongPress",
           ),
@@ -56,7 +56,7 @@ class ExampleButton extends StatelessWidget {
                 TenButtonText("事件为null时颜色配置无效"),
               ]),
           const TenDivider(),
-          const TenListItem(title: "预设按钮类型"),
+          const TenListITile(title: "预设按钮类型"),
           Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
             TenButton.success("成功", onTap: () {}),
             TenButtonText.success("成功", onTap: () {}),
