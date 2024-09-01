@@ -129,16 +129,26 @@ void showTenLoading(BuildContext context,
         child: Center(
           child: (message == null) && (!showCard)
               ? const CircularProgressIndicator(color: Colors.white)
-              : TenCard(
-                  child: Padding(
-                  padding:(message == null) ? const EdgeInsets.all(16) : const EdgeInsets.symmetric(vertical: 16, horizontal: 36),
-                  child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        CircularProgressIndicator(color: TenScheme.primary),
-                        if ((message != null)) Text(message)
-                      ].withIntervals(hSize: 24)),
-                )),
+              : Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16)),
+                    child: Padding(
+                      padding: (message == null)
+                          ? const EdgeInsets.all(16)
+                          : const EdgeInsets.symmetric(
+                              vertical: 16, horizontal: 36),
+                      child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            CircularProgressIndicator(color: TenScheme.primary),
+                            if ((message != null)) Text(message)
+                          ].withIntervals(hSize: 24)),
+                    ),
+                  )),
         ),
       ),
     ).animate().fadeIn(curve: Curves.decelerate),

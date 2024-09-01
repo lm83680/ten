@@ -37,22 +37,24 @@ class _ExampleFeedBackState extends State<ExampleFeedBack> {
                         onTap: () => Navigator.pop(context));
                   },
                 ),
-                TenButton.wraning(
-                  "warning",
-                  onTap: () {
-                    showTenSnackbar(context, "Warning",
-                        message: "使用预设主题色", type: FeedbackOptionType.warning());
-                  },
-                ),
-                TenButton.error(
-                  "error",
-                  onTap: () {
-                    showTenSnackbar(context, "Error",
-                        message: "使用预设主题色", type: FeedbackOptionType.error());
-                  },
-                )
               ],
-            ).intrinsicHeight(),
+            ),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+              TenButton.wraning(
+                "warning",
+                onTap: () {
+                  showTenSnackbar(context, "Warning",
+                      message: "使用预设主题色", type: FeedbackOptionType.warning());
+                },
+              ),
+              TenButton.error(
+                "error",
+                onTap: () {
+                  showTenSnackbar(context, "Error",
+                      message: "使用预设主题色", type: FeedbackOptionType.error());
+                },
+              )
+            ]),
             const TenListITile(
               title: "showTenLoading() 全屏幕加载状态",
               subtitle: "发起一个全屏幕的遮罩，一般用于网络请求时，必须手动使用hideTenLoading()关闭",
@@ -76,16 +78,18 @@ class _ExampleFeedBackState extends State<ExampleFeedBack> {
                         .then((_) => hideTenLoading());
                   },
                 ),
-                TenButton(
-                  "message 自动带卡片",
-                  onTap: () {
-                    showTenLoading(context, message: "message");
-                    Future.delayed(const Duration(seconds: 3))
-                        .then((_) => hideTenLoading());
-                  },
-                )
               ],
             ),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+              TenButton(
+                "message 自动带卡片",
+                onTap: () {
+                  showTenLoading(context, message: "message");
+                  Future.delayed(const Duration(seconds: 3))
+                      .then((_) => hideTenLoading());
+                },
+              )
+            ]),
             const TenListITile(
               title: ".withLoading(bool) 让一个部件进入loading状态",
               subtitle: "直接对Widget使用 .withLoading(bool)",
@@ -110,8 +114,8 @@ class _ExampleFeedBackState extends State<ExampleFeedBack> {
                 color: Colors.white,
               ),
               onTap: () => setState(() => isCardLoading = !isCardLoading),
-            ).intrinsicWidth().withLoading(isCardLoading,size: 14),
-          ].withSeparator().withIntervals(hSize: 16)),
+            ).intrinsicWidth().withLoading(isCardLoading, size: 14),
+          ].withSeparator().withIntervals(hSize: 16)).scrollView(),
     );
   }
 }

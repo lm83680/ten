@@ -1,6 +1,9 @@
+import 'package:board_datetime_picker/board_datetime_picker.dart';
+import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:example/components/date_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:ten/style/index.dart';
 import 'package:ten/ten.dart';
 
 class ExampleFrom extends StatefulWidget {
@@ -17,7 +20,9 @@ class _ExampleFromState extends State<ExampleFrom> {
     "number": 10,
     "isVip": 1,
     "dropdown": "月亮会",
-    "dateRange": ""
+    "dateRange": "",
+    "dateSingle": "",
+    "timeSingle": ""
   };
   List<RulesItem> rules = [
     RulesItem(key: "name", desction: "名字不能为空"),
@@ -96,7 +101,7 @@ class _ExampleFromState extends State<ExampleFrom> {
                     ],
                   )),
               TenFromItem(
-                  label: "普通条目",
+                  label: "日期范围",
                   help: "此条目右侧仅为文本，依靠点击事件触发，一般如时间选择器，依靠函数触发的数据选项等",
                   inputInput: TenFromDefaultLabel(
                       valueIsEmpty(model['dateRange'])
@@ -104,17 +109,76 @@ class _ExampleFromState extends State<ExampleFrom> {
                           : "${model['dateRange']}", onTap: () async {
                     List<DateTime?> dates = await Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => DatePicker(),
+                        builder: (context) => const DatePicker(
+                          calendarType: CalendarDatePicker2Type.range,
+                        ),
                       ),
                     );
-                    dates = dates.map((e) => e != null ? DateUtils.dateOnly(e) : null).toList();
+                    dates = dates
+                        .map((e) => e != null ? DateUtils.dateOnly(e) : null)
+                        .toList();
                     if (dates.isNotEmpty) {
-                      final startDate = dates[0].toString().replaceAll('00:00:00.000', '');
+                      final startDate =
+                          dates[0].toString().replaceAll('00:00:00.000', '');
                       final endDate = dates.length > 1
                           ? dates[1].toString().replaceAll('00:00:00.000', '')
                           : ' / ';
                       setState(() {
                         model['dateRange'] = '$startDate至 $endDate';
+                      });
+                    }
+                  })),
+              TenFromItem(
+                  label: "指定日期",
+                  inputInput: TenFromDefaultLabel(
+                      valueIsEmpty(model['dateSingle'])
+                          ? "选择一个日期"
+                          : "${model['dateSingle']}", onTap: () async {
+                    List<DateTime?> dates = await Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const DatePicker(
+                          calendarType: CalendarDatePicker2Type.single,
+                        ),
+                      ),
+                    );
+                    dates = dates
+                        .map((e) => e != null ? DateUtils.dateOnly(e) : null)
+                        .toList();
+                    if (dates.isNotEmpty) {
+                      final startDate =
+                          dates[0].toString().replaceAll('00:00:00.000', '');
+                      setState(() {
+                        model['dateSingle'] = startDate;
+                      });
+                    }
+                  })),
+              TenFromItem(
+                  label: "日期且时间",
+                  inputInput: TenFromDefaultLabel(
+                      valueIsEmpty(model['timeSingle'])
+                          ? "选择一个时间"
+                          : "${model['timeSingle']}", onTap: () async {
+                    final result = await showBoardDateTimePicker(
+                        context: context,
+                        pickerType: DateTimePickerType.datetime,
+                        options: BoardDateTimeOptions(
+                          foregroundColor: Colors.white,
+                          activeColor:TenScheme.primary,
+                          inputable: false,
+                          weekend: BoardPickerWeekendOptions(
+                            saturdayColor: TenScheme.success,
+                            sundayColor: TenScheme.success
+                          ),
+                          languages: BoardPickerLanguages(
+                            locale: 'zh',
+                            today: '今天',
+                            tomorrow: '明天',
+                            now: '现在',
+                          ),
+                        ));
+                    if (result != null) {
+                      setState(() {
+                        model['timeSingle'] = "${result.year}-${result.month}-${result.day} ${result.hour}:${result.minute}";
                       });
                     }
                   }))
