@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  calendar_date_picker2: ^1.1.6 # 第三方日期范围选择器包
   ten:
     path: ../
 

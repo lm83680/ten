@@ -9,6 +9,10 @@ void main() {
         scaffoldBackgroundColor: TenScheme.neutralLight200,
         appBarTheme: const AppBarTheme(backgroundColor: Colors.white)),
     debugShowCheckedModeBanner: false,
+    supportedLocales: const [
+        Locale('en', ''),
+        Locale('zh', ''),
+      ],
     home: const MainApp(),
   ));
 }

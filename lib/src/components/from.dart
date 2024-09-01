@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ten/style/index.dart';
 import 'package:ten/ten.dart';
 
 ///表单
@@ -29,13 +30,13 @@ class TenFrom extends StatefulWidget {
     if (rules == null) return [];
     List<RulesItem> errorIndex = [];
     for (var rule in rules) {
-      if (data.keys.contains(rule.name)) {
+      if (data.keys.contains(rule.key)) {
         //如果validation存在，且不通过校验返回false.
-        if (rule.validation != null && !rule.validation!(data[rule.name])) {
+        if (rule.validation != null && !rule.validation!(data[rule.key])) {
           errorIndex.add(rule);
         }
         //如果validation不存在，且 isRequired 不为 false , 值为空则返回 false
-        else if (rule.isRequired != false && valueIsEmpty(data[rule.name])) {
+        else if (rule.isRequired != false && valueIsEmpty(data[rule.key])) {
           errorIndex.add(rule);
         }
       }
@@ -44,7 +45,7 @@ class TenFrom extends StatefulWidget {
       if (context == null) throw "autoTip == true && context==null , error";
       showTenSnackbar(context, "校验失败",
           message: errorIndex.map((rule) {
-            return rule.desction ?? '[${rule.name}]校验不通过';
+            return rule.desction ?? '[${rule.key}]校验不通过';
           }).join('; '),
           type: FeedbackOptionType.error());
     }
@@ -56,7 +57,7 @@ class _TenFromState extends State<TenFrom> {
   bool shouldShowAsterisk(String key) {
     if (widget.rules == null) return false;
     for (var element in widget.rules!) {
-      if (element.name == key) {
+      if (element.key == key) {
         if (element.isRequired == true ||
             (element.isRequired == null && element.validation == null)) {
           return true;
@@ -77,9 +78,7 @@ class _TenFromState extends State<TenFrom> {
                 GlobalKey key = GlobalKey();
                 label = GestureDetector(
                   onTap: () => TenToolTip.showToolTip(
-                      context,
-                      element.help!,
-                      key,
+                      context, element.help!, key,
                       title: element.label),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -98,8 +97,8 @@ class _TenFromState extends State<TenFrom> {
                           width: widget.labelWidth,
                           child: Align(
                               alignment: Alignment.centerRight,
-                              child: element.modelKey != null &&
-                                      shouldShowAsterisk(element.modelKey!)
+                              child: element.ruleKey != null &&
+                                      shouldShowAsterisk(element.ruleKey!)
                                   ? Badge(
                                       alignment: Alignment.topLeft,
                                       backgroundColor: Colors.transparent,
@@ -113,9 +112,9 @@ class _TenFromState extends State<TenFrom> {
                                   : label))
                       .padding(right: 24),
                   Expanded(
-                      child: Align(
-                    alignment: Alignment.centerRight,
-                    child:  element.inputInput,
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: element.inputInput,
                     ),
                   )
                 ],
@@ -128,10 +127,7 @@ class _TenFromState extends State<TenFrom> {
 
 class TenFromItem {
   const TenFromItem(
-      {required this.label,
-      this.modelKey,
-      this.help,
-      required this.inputInput});
+      {required this.label, this.ruleKey, this.help, required this.inputInput});
 
   final String label;
 
@@ -139,13 +135,13 @@ class TenFromItem {
   final String? help;
 
   ///将根据此值计算验证规则
-  final String? modelKey;
+  final String? ruleKey;
   final Widget inputInput;
 }
 
 /// 若validation为空，不为空即可通过校验,若不为空，将依据validation的规则
 class RulesItem {
-  final String name;
+  final String key;
 
   ///是否不能为null，展示星号的依据
   final bool? isRequired;
@@ -154,5 +150,32 @@ class RulesItem {
   ///校验不通过的提示词
   final String? desction;
   RulesItem(
-      {required this.name, this.isRequired, this.desction, this.validation});
+      {required this.key, this.isRequired, this.desction, this.validation});
+}
+
+///仅为文本，依靠点击事件触发，一般如时间选择器，依靠函数触发的数据选项等
+class TenFromDefaultLabel extends StatelessWidget {
+  const TenFromDefaultLabel(this.text, {required this.onTap, this.color, super.key});
+  final void Function() onTap;
+  final String text;
+  final Color? color;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+          color: Colors.transparent,
+          height: 48,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text(
+                text,
+                style: TenScheme.action.copyWith(color: color?? TenScheme.primary,height: 1),
+              ).padding(right: 8),
+              Icon(Icons.navigate_next_rounded,color: color?? TenScheme.primary,size: 20)
+            ],
+          )),
+    );
+  }
 }

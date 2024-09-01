@@ -9,6 +9,7 @@ export 'components/tile.dart';
 export 'components/section.dart';
 export 'components/tooltip.dart';
 export 'components/tag.dart';
+export 'components/dropdownbutton.dart';
 export 'components/tabs.dart';
 export 'components/input.dart';
 export 'components/switch.dart';
