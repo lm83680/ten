@@ -6,7 +6,7 @@ class TenFrom extends StatefulWidget {
   const TenFrom(
       {super.key,
       required this.model,
-      this.labelWidth = 88,
+      this.labelWidth = 76,
       this.rules,
       required this.children});
 
@@ -115,13 +115,14 @@ class _TenFromState extends State<TenFrom> {
                   Expanded(
                       child: Align(
                     alignment: Alignment.centerRight,
-                    child: element.inputInput,
-                  ))
+                    child:  element.inputInput,
+                    ),
+                  )
                 ],
               );
             })
             .toList()
-            .withIntervals(hSize: 16));
+            .withSeparator());
   }
 }
 

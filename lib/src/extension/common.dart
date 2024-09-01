@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:ten/ten.dart';
 
 extension WidgetShowExtension on Widget? {
@@ -29,9 +30,12 @@ extension WidgetCommonExtension on Widget {
             child: Container(
               color: Colors.transparent,
               child: Center(
-                child: SizedBox(width: size,height: size,child:  CircularProgressIndicator(
-                  color: TenScheme.primary,
-                )), // 中间的加载指示器
+                child: SizedBox(
+                    width: size,
+                    height: size,
+                    child: CircularProgressIndicator(
+                      color: TenScheme.primary,
+                    )), // 中间的加载指示器
               ),
             ),
           ),
@@ -48,9 +52,11 @@ extension WidgetCommonExtension on Widget {
     );
   }
 
-    Widget padding({double left = 0, double right = 0, double top = 0, double bottom = 0}) {
+  Widget padding(
+      {double left = 0, double right = 0, double top = 0, double bottom = 0}) {
     return Padding(
-      padding: EdgeInsets.only(left: left, right: right, top: top, bottom: bottom),
+      padding:
+          EdgeInsets.only(left: left, right: right, top: top, bottom: bottom),
       child: this,
     );
   }
@@ -60,6 +66,15 @@ extension WidgetCommonExtension on Widget {
       padding: EdgeInsets.all(value),
       child: this,
     );
+  }
+
+  ///让一个部件点击或长按时触发一次震动
+  Widget withHapticFeedback() {
+    return GestureDetector(
+        onTap:()=>HapticFeedback.lightImpact(),
+        onLongPress:()=>HapticFeedback.lightImpact(),
+        behavior: HitTestBehavior.translucent,
+        child: this);
   }
 }
 

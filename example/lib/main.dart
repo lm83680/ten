@@ -6,7 +6,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MaterialApp(
     theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
+        scaffoldBackgroundColor: TenScheme.neutralLight200,
         appBarTheme: const AppBarTheme(backgroundColor: Colors.white)),
     debugShowCheckedModeBanner: false,
     home: const MainApp(),

@@ -9,7 +9,6 @@ class ExampleFrom extends StatefulWidget {
 }
 
 class _ExampleFromState extends State<ExampleFrom> {
-
   Map<String, dynamic> model = {
     "name": "",
     "phone": "",
@@ -26,8 +25,7 @@ class _ExampleFromState extends State<ExampleFrom> {
   ];
 
   void onSummit() {
-    if (TenFrom.onValidate(rules, model, autoTip: true, context: context)
-        .isEmpty) {
+    if (TenFrom.onValidate(rules, model, autoTip: true, context: context).isEmpty) {
       showTenSnackbar(context, "校验通过", type: FeedbackOptionType.success());
     }
   }
@@ -35,8 +33,7 @@ class _ExampleFromState extends State<ExampleFrom> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: TenAppBar(
-            title: "表单示例"),
+        appBar: TenAppBar(title: "表单示例"),
         body: Column(
           children: [
             TenCard(
@@ -44,21 +41,36 @@ class _ExampleFromState extends State<ExampleFrom> {
               TenFromItem(
                   label: "名字",
                   modelKey: "name",
-                  inputInput: TextField(
+                  inputInput: TenFromInput(
+                    hintText: "请输入",
                     onChanged: (value) => model['name'] = value,
                   )),
               TenFromItem(
                   label: "电话号码",
                   help: "11位数的中国大陆手机号码才能通过检验",
                   modelKey: "phone",
-                  inputInput:
-                      TextField(onChanged: (value) => model['phone'] = value)),
+                  inputInput: TenFromInput(
+                    hintText: "请输入",
+                    keyboardType: TextInputType.phone,
+                    maxLength: 11,
+                    onChanged: (value) => model['phone'] = value,
+                  )),
               TenFromItem(
-                  label: "身高", modelKey: "heigth", inputInput: TextField()),
+                  label: "身高",
+                  modelKey: "heigth",
+                  inputInput: TextFormField(
+                decoration: InputDecoration(labelText: 'Enter text'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'This field cannot be empty';
+                  }
+                  return null;
+                },
+              ),),
               TenFromItem(
                   label: "性别",
                   modelKey: "isVip",
-                  inputInput: Switch(
+                  inputInput: TenSwitch(
                       value: model['isVip'] == 1 ? true : false,
                       onChanged: (value) {
                         setState(() {

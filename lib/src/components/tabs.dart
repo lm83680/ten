@@ -34,11 +34,7 @@ class TenTabs extends StatelessWidget implements PreferredSizeWidget {
       unselectedLabelColor: TenScheme.neutralLight,
       labelColor: TenScheme.textLight,
       labelStyle: TenScheme.action,
-      overlayColor: WidgetStateProperty.resolveWith<Color?>(
-        (Set<WidgetState> states) {
-          return Colors.transparent;
-        },
-      ),
+      overlayColor: WidgetStateColor.transparent,
       indicatorColor: TenScheme.primary,
       dividerHeight: 1,
       dividerColor: TenScheme.neutralLight200,

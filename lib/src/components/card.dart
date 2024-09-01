@@ -27,7 +27,7 @@ class TenCard extends StatelessWidget {
         child: Ink(
           padding: padding ?? const EdgeInsets.all(16),
           decoration: BoxDecoration(
-              color: TenScheme.neutralLight200,
+              color: Colors.white,
               borderRadius: BorderRadius.circular(16)),
           child: child,
         ));
@@ -100,7 +100,7 @@ class TenCardPreset2 extends StatelessWidget {
       margin: margin ?? const EdgeInsets.all(16),
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-          color: TenScheme.neutralLight200,
+          color: Colors.white,
           borderRadius: BorderRadius.circular(16)),
       child: Column(
         mainAxisSize: MainAxisSize.min,
