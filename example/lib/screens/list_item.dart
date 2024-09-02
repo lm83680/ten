@@ -58,10 +58,10 @@ class ExampleListItem extends StatelessWidget {
               title: "无 subtitle 的TenListITile",
               subtitle: "TenListITile 仅支持 点按 和 长按 事件",
               onTap: () => {
-                showTenSnackbar(context,"点按",type: FeedbackOptionType.success())
+                TenFeedBack.showTenSnackbar(context,"点按",type: FeedbackOptionType.success())
               },
               onLongPress: () => {
-                showTenSnackbar(context,"长按",type: FeedbackOptionType.success())
+                TenFeedBack.showTenSnackbar(context,"长按",type: FeedbackOptionType.success())
               },
               leading: IconButton(
                 icon: Icon(

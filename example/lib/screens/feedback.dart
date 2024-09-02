@@ -25,13 +25,13 @@ class _ExampleFeedBackState extends State<ExampleFeedBack> {
                 TenButton(
                   "primary",
                   onTap: () {
-                    showTenSnackbar(context, "默认提醒", message: "使用预设主题色");
+                    TenFeedBack.showTenSnackbar(context, "默认提醒", message: "使用预设主题色");
                   },
                 ),
                 TenButton.success(
                   "success",
                   onTap: () {
-                    showTenSnackbar(context, "Success",
+                    TenFeedBack.showTenSnackbar(context, "Success",
                         message: "这是一个带点击事件的横幅，点击返回上一页",
                         type: FeedbackOptionType.success(),
                         onTap: () => Navigator.pop(context));
@@ -43,14 +43,14 @@ class _ExampleFeedBackState extends State<ExampleFeedBack> {
               TenButton.wraning(
                 "warning",
                 onTap: () {
-                  showTenSnackbar(context, "Warning",
+                  TenFeedBack.showTenSnackbar(context, "Warning",
                       message: "使用预设主题色", type: FeedbackOptionType.warning());
                 },
               ),
               TenButton.error(
                 "error",
                 onTap: () {
-                  showTenSnackbar(context, "Error",
+                  TenFeedBack.showTenSnackbar(context, "Error",
                       message: "使用预设主题色", type: FeedbackOptionType.error());
                 },
               )
@@ -65,17 +65,17 @@ class _ExampleFeedBackState extends State<ExampleFeedBack> {
                 TenButton(
                   "推荐用法",
                   onTap: () {
-                    showTenLoading(context);
+                    TenFeedBack.showTenLoading(context);
                     Future.delayed(const Duration(seconds: 3))
-                        .then((_) => hideTenLoading());
+                        .then((_) => TenFeedBack.hideTenLoading());
                   },
                 ),
                 TenButton(
                   "强制带卡片",
                   onTap: () {
-                    showTenLoading(context, showCard: true);
+                    TenFeedBack.showTenLoading(context, showCard: true);
                     Future.delayed(const Duration(seconds: 3))
-                        .then((_) => hideTenLoading());
+                        .then((_) => TenFeedBack.hideTenLoading());
                   },
                 ),
               ],
@@ -84,9 +84,9 @@ class _ExampleFeedBackState extends State<ExampleFeedBack> {
               TenButton(
                 "message 自动带卡片",
                 onTap: () {
-                  showTenLoading(context, message: "message");
+                  TenFeedBack.showTenLoading(context, message: "message");
                   Future.delayed(const Duration(seconds: 3))
-                      .then((_) => hideTenLoading());
+                      .then((_) =>TenFeedBack. hideTenLoading());
                 },
               )
             ]),

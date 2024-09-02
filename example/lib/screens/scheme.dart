@@ -28,7 +28,7 @@ class ExampleScheme extends StatelessWidget {
                 "尝试更改主题",
                 onTap: () {
                   TenScheme().setScheme(Colors.orangeAccent);
-                  showTenSnackbar(context, "设置成功",
+                  TenFeedBack.showTenSnackbar(context, "设置成功",
                       type: FeedbackOptionType.success());
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(builder: (context) => ExampleScheme()),
@@ -39,7 +39,7 @@ class ExampleScheme extends StatelessWidget {
                 "恢复默认",
                 onTap: () {
                   TenScheme().setScheme(Color(0xff006ffd));
-                  showTenSnackbar(context, "设置成功",
+                  TenFeedBack.showTenSnackbar(context, "设置成功",
                       type: FeedbackOptionType.success());
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(builder: (context) => ExampleScheme()),

@@ -21,10 +21,10 @@ class ExampleButton extends StatelessWidget {
               TenButton(
                 "primary",
                 onTap: () {
-                  showTenSnackbar(context, "触发按钮", message: "触发onTap");
+                  TenFeedBack.showTenSnackbar(context, "触发按钮", message: "触发onTap");
                 },
                 onLongPress: () {
-                  showTenSnackbar(context, "触发按钮", message: "触发onLongPress");
+                  TenFeedBack.showTenSnackbar(context, "触发按钮", message: "触发onLongPress");
                 },
               ),
               TenButtonText("primary text", onTap: () {}),

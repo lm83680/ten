@@ -55,7 +55,7 @@ class TenCardPreset extends StatelessWidget {
       margin: margin ?? const EdgeInsets.all(16),
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-          color: TenScheme.neutralLight200,
+          color: Colors.white,
           borderRadius: BorderRadius.circular(16)),
       child: Row(
         mainAxisSize: MainAxisSize.min,

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:ten/src/extension/common.dart';
-import 'package:ten/style/index.dart';
+import 'package:ten/ten.dart';
 
+///绝大部分的App一般不使用此种方式（不符合用户体验优先原则）
+///
+///推荐你使用[TenButtonSheet.selector]
 class TenDropdownMenuItem {
   final String value;
   final bool enabled;
@@ -17,10 +19,7 @@ class TenDropdownMenuItem {
 
 class TenDropdownButton extends StatelessWidget {
   const TenDropdownButton(
-      {super.key,
-      required this.value,
-      required this.items,
-      this.onChanged});
+      {super.key, required this.value, required this.items, this.onChanged});
   final String value;
   final List<TenDropdownMenuItem> items;
   final void Function(String?)? onChanged;
@@ -34,9 +33,9 @@ class TenDropdownButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         style: TenScheme.action.copyWith(color: TenScheme.textLight),
         value: value,
-        onChanged:onChanged,
+        onChanged: onChanged,
         items: items.map((e) {
-          Color? color =  e.enabled ? null :  TenScheme.neutralLight ;
+          Color? color = e.enabled ? null : TenScheme.neutralLight;
           return DropdownMenuItem(
             enabled: e.enabled,
             value: e.value,
@@ -45,12 +44,10 @@ class TenDropdownButton extends StatelessWidget {
               children: [
                 if (e.icon != null)
                   IconTheme(
-                          data: IconThemeData(
-                              size: 18,
-                              color: color),
+                          data: IconThemeData(size: 18, color: color),
                           child: e.icon!)
                       .padding(right: 8),
-                Text(e.label, style: TextStyle(color:color))
+                Text(e.label, style: TextStyle(color: color))
               ],
             ).padding(right: 16),
           );

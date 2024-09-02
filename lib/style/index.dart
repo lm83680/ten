@@ -3,7 +3,7 @@ library style;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class TenScheme {
+interface class TenScheme {
   //字体颜色
   static Color textLight = const Color(0xff1f2024);
   static Color textDark = const Color(0xffffffff);

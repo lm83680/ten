@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ten/style/index.dart';
 import 'package:ten/ten.dart';
 
 ///表单
@@ -7,14 +6,14 @@ class TenFrom extends StatefulWidget {
   const TenFrom(
       {super.key,
       required this.model,
-      this.labelWidth = 76,
+      this.labelWidth = 80,
       this.rules,
       required this.children});
 
   ///表单的数据对象
   final Map<String, dynamic> model;
 
-  ///标签的长度 default=48
+  ///标签的长度 default=80 刚好 5个字 或 4个字加上角标
   final double labelWidth;
   final List<RulesItem>? rules;
 
@@ -43,7 +42,7 @@ class TenFrom extends StatefulWidget {
     }
     if (errorIndex.isNotEmpty && autoTip == true) {
       if (context == null) throw "autoTip == true && context==null , error";
-      showTenSnackbar(context, "校验失败",
+      TenFeedBack.showTenSnackbar(context, "校验失败",
           message: errorIndex.map((rule) {
             return rule.desction ?? '[${rule.key}]校验不通过';
           }).join('; '),
@@ -114,7 +113,7 @@ class _TenFromState extends State<TenFrom> {
                   Expanded(
                     child: Align(
                       alignment: Alignment.centerRight,
-                      child: element.inputInput,
+                      child: element.inputWidget,
                     ),
                   )
                 ],
@@ -127,7 +126,7 @@ class _TenFromState extends State<TenFrom> {
 
 class TenFromItem {
   const TenFromItem(
-      {required this.label, this.ruleKey, this.help, required this.inputInput});
+      {required this.label, this.ruleKey, this.help, required this.inputWidget});
 
   final String label;
 
@@ -136,7 +135,7 @@ class TenFromItem {
 
   ///将根据此值计算验证规则
   final String? ruleKey;
-  final Widget inputInput;
+  final Widget inputWidget;
 }
 
 /// 若validation为空，不为空即可通过校验,若不为空，将依据validation的规则

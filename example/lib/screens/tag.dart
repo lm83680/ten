@@ -50,14 +50,14 @@ class ExampleTag extends StatelessWidget {
               TenTag(
                 "ontap",
                 onTap: () {
-                  showTenSnackbar(context, "ontap");
+                  TenFeedBack.showTenSnackbar(context, "ontap");
                 },
                 plain: true,
               ),
               TenTag(
                 "success",
                 onLongPress:() {
-                  showTenSnackbar(context, "onLongPress");
+                  TenFeedBack.showTenSnackbar(context, "onLongPress");
                 },
                 plain: true,
               ),
