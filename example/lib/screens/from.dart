@@ -15,6 +15,7 @@ class ExampleFrom extends StatefulWidget {
 class _ExampleFromState extends State<ExampleFrom> {
   Map<String, dynamic> model = {
     "name": "",
+    "remark": "",
     "phone": "",
     "number": 10,
     "isVip": 1,
@@ -169,7 +170,21 @@ class _ExampleFromState extends State<ExampleFrom> {
                     }
                   })),
             ])),
-            TenCard(child: TenFrom(model: model, children: [
+            TenCard(
+                child: TenFrom(model: model, children: [
+              TenFromItem(
+                  label: "备注",
+                  help: "上下结构，一般仅有多行输入框才会使用,注意，如果使用该参数，建议将另外起一行表单",
+                  ruleKey: "remark",
+                  tbStructure: true,
+                  inputWidget: TenFromInput(
+                    maxLine: 3,
+                    hintText: "多行文本",
+                    onChanged: (value) => model['remark'] = value,
+                  ))
+            ])),
+            TenCard(
+                child: TenFrom(model: model, children: [
               TenFromItem(
                   label: "单项选择",
                   help: "一般建议在新的卡片里，整体更协调",
@@ -187,11 +202,10 @@ class _ExampleFromState extends State<ExampleFrom> {
                     },
                   ))
             ])),
-            TenCard(
-                child: TenButton(
+            TenButton(
               "校验数据",
               onTap: onSummit,
-            ).intrinsicWidth()),
+            ).paddingAll(16),
           ],
         ).scrollView());
   }

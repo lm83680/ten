@@ -30,7 +30,7 @@ class TenButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     BorderRadius radius = BorderRadius.circular(12);
-    EdgeInsetsGeometry padding = const EdgeInsets.symmetric(horizontal: 24, vertical: 12);
+    EdgeInsetsGeometry padding = const EdgeInsets.symmetric(horizontal: 32, vertical: 16);
 
     return ClipRRect(
         borderRadius: radius,
@@ -45,8 +45,9 @@ class TenButton extends StatelessWidget {
                         ? TenScheme.neutralLight
                         : backgorundColor ?? TenScheme.primary,
                     child: IconTheme(
-                      data: IconThemeData(color: TenScheme.primary, size: 16),
+                      data: const IconThemeData(size: 16),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           if (lefticon != null) lefticon!.padding(right: 8),
                           Text(text,
@@ -90,8 +91,7 @@ class TenButtonBorder extends StatelessWidget {
         ? TenScheme.neutralLight
         : borderColor ?? TenScheme.primary;
     BorderRadius radius = BorderRadius.circular(12);
-    EdgeInsetsGeometry padding =
-        const EdgeInsets.symmetric(horizontal: 24, vertical: 12);
+    EdgeInsetsGeometry padding = const EdgeInsets.symmetric(horizontal: 32, vertical: 16);
     return InkWell(
       onTap: onTap,
       borderRadius: radius,
@@ -103,7 +103,7 @@ class TenButtonBorder extends StatelessWidget {
             border: Border.all(color: color.withOpacity(0.6), width: 1),
             borderRadius: radius),
         child: IconTheme(
-            data: IconThemeData(color: TenScheme.primary, size: 14),
+            data: const IconThemeData(size: 14),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -113,7 +113,7 @@ class TenButtonBorder extends StatelessWidget {
               ],
             )),
       ),
-    );
+    ).intrinsicWidth();
   }
 }
 
@@ -150,8 +150,7 @@ class TenButtonText extends StatelessWidget {
         ? TenScheme.neutralLight
         : textColor ?? TenScheme.primary;
     BorderRadius radius = BorderRadius.circular(12);
-    EdgeInsetsGeometry padding =
-        const EdgeInsets.symmetric(horizontal: 24, vertical: 12);
+    EdgeInsetsGeometry padding = const EdgeInsets.symmetric(horizontal: 32, vertical: 16);
     return InkWell(
       onTap: onTap,
       borderRadius: radius,
@@ -170,6 +169,6 @@ class TenButtonText extends StatelessWidget {
               if (righticon != null) righticon!.padding(left: 4),
             ],
           ))),
-    );
+    ).intrinsicWidth();
   }
 }

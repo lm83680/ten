@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:ten/ten.dart';
 
 class TenDesctionsItemModel {
@@ -61,15 +62,21 @@ class _TenDesctionsListState extends State<TenDesctionsList> {
                       textAlign: TextAlign.right, style: TenScheme.desction))
             ],
           );
-        }),
+        }).animate(interval:const Duration(milliseconds: 40)).fadeIn(),
         if (!isShowMore && widget.list.length > widget.defalutShowItems)
-          Center(
-              child: TenButtonText(
-            "查看更多",
+          GestureDetector(
             onTap: showMore,
-            righticon: Icon(Icons.expand_more_rounded),
-            textColor: TenScheme.neutralDark200,
-          ))
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("查看更多", style: TenScheme.desction),
+                Icon(
+                  Icons.expand_more_rounded,
+                  color: TenScheme.neutralDark200,
+                )
+              ],
+            ),
+          )
       ].withIntervals(hSize: widget.interval),
     );
   }

@@ -31,13 +31,12 @@ class _ExampleGuideState extends State<ExampleGuide> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: TenAppBar(key: _key4, title: "引导"),
-        floatingActionButton: FloatingActionButton(
+        floatingActionButton: FloatingActionButton.extended(
             key: _key5,
             onPressed: () => {},
+            elevation: 0,
             backgroundColor: TenScheme.primary,
-            child: const Text(
-              "底部",
-              style: TextStyle(color: Colors.white),
+            label: const Text("底部",style: TextStyle(color: Colors.white),
             )),
         body: TenCard.column(
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -28,7 +28,14 @@ class TenCard extends StatelessWidget {
           padding: padding ?? const EdgeInsets.all(16),
           decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(16)),
+              boxShadow: [
+                BoxShadow(
+                  color: TenScheme.neutralLight50.withOpacity(0.1), // 阴影颜色
+                  spreadRadius: 2, // 阴影扩散半径
+                  blurRadius: 6, // 阴影模糊半径
+                ),
+              ],
+              borderRadius: BorderRadius.circular(12)),
           child: child,
         ));
   }
@@ -41,8 +48,10 @@ class TenCardPreset extends StatelessWidget {
       required this.title,
       this.subtitle,
       required this.backgorund,
-      this.aspectRatio = 3/2,
-      this.bottom, this.description, this.tag});
+      this.aspectRatio = 3 / 2,
+      this.bottom,
+      this.description,
+      this.tag});
   final String title;
   final String? subtitle;
   final Widget backgorund;
@@ -57,8 +66,7 @@ class TenCardPreset extends StatelessWidget {
       margin: margin ?? const EdgeInsets.all(16),
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(16)),
+          color: Colors.white, borderRadius: BorderRadius.circular(16)),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -83,26 +91,24 @@ class TenCardPreset extends StatelessWidget {
                     ),
                   ),
                 ),
-               Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  child: DefaultTextStyle(
-                  style:const TextStyle(color: Colors.white),
-                  child: TenListITile(
-                    title: title,
-                    subtitle: subtitle,
-                    maxLines: 1,
-                  ),
-                )),
-                if(tag!=null) Positioned(
-                  top: 16,
-                  right: 16,
-                  child: tag!)
+                Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: DefaultTextStyle(
+                      style: const TextStyle(color: Colors.white),
+                      child: TenListITile(
+                        title: title,
+                        subtitle: subtitle,
+                        maxLines: 1,
+                      ),
+                    )),
+                if (tag != null) Positioned(top: 16, right: 16, child: tag!)
               ],
             ),
           ),
-          if(description!=null) Text(description!).padding(left: 16,right: 16,top: 16),
+          if (description != null)
+            Text(description!).padding(left: 16, right: 16, top: 16),
           if (bottom != null) bottom!.padding(left: 4, right: 16).paddingAll(16)
         ],
       ),

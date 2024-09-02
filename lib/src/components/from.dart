@@ -90,34 +90,43 @@ class _TenFromState extends State<TenFrom> {
                   ),
                 );
               }
-              return Row(
-                children: [
-                  SizedBox(
-                          width: widget.labelWidth,
+              Widget title = SizedBox(
+                      width: widget.labelWidth,
+                      child: Align(
+                          alignment: element.tbStructure
+                              ? Alignment.centerLeft
+                              : Alignment.centerRight,
+                          child: element.ruleKey != null &&
+                                  shouldShowAsterisk(element.ruleKey!)
+                              ? Badge(
+                                  alignment: Alignment.topLeft,
+                                  backgroundColor: Colors.transparent,
+                                  offset: const Offset(-14, 0),
+                                  label: Text("*",
+                                      style: TextStyle(
+                                          color: TenScheme.error,
+                                          fontSize: 14)),
+                                  child: label,
+                                )
+                              : label))
+                  .padding(right: 24);
+              return element.tbStructure
+                  ? Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [title.padding(bottom: 8), element.inputWidget],
+                    )
+                  : Row(
+                      children: [
+                        title.padding(right: 24),
+                        Expanded(
                           child: Align(
-                              alignment: Alignment.centerRight,
-                              child: element.ruleKey != null &&
-                                      shouldShowAsterisk(element.ruleKey!)
-                                  ? Badge(
-                                      alignment: Alignment.topLeft,
-                                      backgroundColor: Colors.transparent,
-                                      offset: const Offset(-14, 0),
-                                      label: Text("*",
-                                          style: TextStyle(
-                                              color: TenScheme.error,
-                                              fontSize: 14)),
-                                      child: label,
-                                    )
-                                  : label))
-                      .padding(right: 24),
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: element.inputWidget,
-                    ),
-                  )
-                ],
-              );
+                            alignment: Alignment.centerRight,
+                            child: element.inputWidget,
+                          ),
+                        )
+                      ],
+                    );
             })
             .toList()
             .withSeparator());
@@ -126,7 +135,11 @@ class _TenFromState extends State<TenFrom> {
 
 class TenFromItem {
   const TenFromItem(
-      {required this.label, this.ruleKey, this.help, required this.inputWidget});
+      {required this.label,
+      this.ruleKey,
+      this.help,
+      required this.inputWidget,
+      this.tbStructure = false});
 
   final String label;
 
@@ -136,6 +149,9 @@ class TenFromItem {
   ///将根据此值计算验证规则
   final String? ruleKey;
   final Widget inputWidget;
+
+  ///上下结构，一般仅有多行输入框才会使用,注意，如果使用该参数，建议将另外起一行表单
+  final bool tbStructure;
 }
 
 /// 若validation为空，不为空即可通过校验,若不为空，将依据validation的规则
@@ -154,7 +170,8 @@ class RulesItem {
 
 ///仅为文本，依靠点击事件触发，一般如时间选择器，依靠函数触发的数据选项等
 class TenFromDefaultLabel extends StatelessWidget {
-  const TenFromDefaultLabel(this.text, {required this.onTap, this.color, super.key});
+  const TenFromDefaultLabel(this.text,
+      {required this.onTap, this.color, super.key});
   final void Function() onTap;
   final String text;
   final Color? color;
@@ -170,9 +187,11 @@ class TenFromDefaultLabel extends StatelessWidget {
             children: [
               Text(
                 text,
-                style: TenScheme.action.copyWith(color: color?? TenScheme.primary,height: 1),
+                style: TenScheme.action
+                    .copyWith(color: color ?? TenScheme.primary, height: 1),
               ).padding(right: 8),
-              Icon(Icons.navigate_next_rounded,color: color?? TenScheme.primary,size: 20)
+              Icon(Icons.navigate_next_rounded,
+                  color: color ?? TenScheme.primary, size: 20)
             ],
           )),
     );

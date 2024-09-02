@@ -14,6 +14,7 @@ class TenFromInput extends StatelessWidget {
       this.onSubmitted,
       this.hintText,
       this.rge,
+      this.maxLine,
       super.key});
   final TextEditingController? controller;
   final FocusNode? focusNode;
@@ -23,6 +24,7 @@ class TenFromInput extends StatelessWidget {
   final void Function(String)? onChanged;
   final void Function()? onEditingComplete;
   final void Function(String)? onSubmitted;
+  final int? maxLine;
 
   ///输入框限制正则表达式，默认不限制
   final String? rge;
@@ -38,8 +40,9 @@ class TenFromInput extends StatelessWidget {
       focusNode: focusNode,
       keyboardType: keyboardType,
       readOnly: readOnly,
-      textAlign: TextAlign.right,
+      textAlign: maxLine != null && maxLine !=1 ? TextAlign.start : TextAlign.right,
       maxLength: maxLength,
+      maxLines: maxLine,
       cursorColor: TenScheme.primary,
       cursorErrorColor: TenScheme.error,
       cursorRadius: const Radius.circular(8),

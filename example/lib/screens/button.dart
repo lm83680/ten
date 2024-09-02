@@ -15,16 +15,20 @@ class ExampleButton extends StatelessWidget {
             title: "一般使用方法",
             subtitle: "目前接受触发onTap和触发onLongPress",
           ),
-          Row(
+          SingleChildScrollView(
+      scrollDirection: Axis.horizontal, // 使内容可以横向滚动
+      child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               TenButton(
                 "primary",
                 onTap: () {
-                  TenFeedBack.showTenSnackbar(context, "触发按钮", message: "触发onTap");
+                  TenFeedBack.showTenSnackbar(context, "触发按钮",
+                      message: "触发onTap");
                 },
                 onLongPress: () {
-                  TenFeedBack.showTenSnackbar(context, "触发按钮", message: "触发onLongPress");
+                  TenFeedBack.showTenSnackbar(context, "触发按钮",
+                      message: "触发onLongPress");
                 },
               ),
               TenButtonText("primary text", onTap: () {}),
@@ -33,7 +37,7 @@ class ExampleButton extends StatelessWidget {
                 onTap: () {},
               ),
             ],
-          ),
+          )),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -57,7 +61,9 @@ class ExampleButton extends StatelessWidget {
               ]),
           const TenDivider(),
           const TenListITile(title: "预设按钮类型"),
-          Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+          SingleChildScrollView(
+      scrollDirection: Axis.horizontal, // 使内容可以横向滚动
+      child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
             TenButton.success("成功", onTap: () {}),
             TenButtonText.success("成功", onTap: () {}),
             TenButtonBorder.success("成功", onTap: () {}),
@@ -70,8 +76,10 @@ class ExampleButton extends StatelessWidget {
               ),
               onTap: () {},
             ),
-          ]),
-          Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+          ])),
+          SingleChildScrollView(
+      scrollDirection: Axis.horizontal, // 使内容可以横向滚动
+      child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
             TenButton.wraning("警告", onTap: () {}),
             TenButtonText.wraning("警告", onTap: () {}),
             TenButtonBorder.wraning("警告", onTap: () {}),
@@ -84,8 +92,10 @@ class ExampleButton extends StatelessWidget {
               ),
               onTap: () {},
             ),
-          ]),
-          Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+          ])),
+          SingleChildScrollView(
+      scrollDirection: Axis.horizontal, // 使内容可以横向滚动
+      child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
             TenButton.error("危险", onTap: () {}),
             TenButtonText.error("危险", onTap: () {}),
             TenButtonBorder.error("危险", onTap: () {}),
@@ -98,10 +108,20 @@ class ExampleButton extends StatelessWidget {
               ),
               onTap: () {},
             ),
-          ]),
+          ])),
           const TenDivider(),
+          TenButton(
+            "常用",
+            onTap: () {
+              TenFeedBack.showTenSnackbar(context, "触发按钮", message: "触发onTap");
+            },
+            onLongPress: () {
+              TenFeedBack.showTenSnackbar(context, "触发按钮",
+                  message: "触发onLongPress");
+            },
+          ),
         ].withPadding(vertical: 16),
-      ).paddingAll(16).scrollView(),
+      ).scrollView(),
     );
   }
 }
