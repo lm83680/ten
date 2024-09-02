@@ -29,19 +29,6 @@ class ExampleCard extends StatelessWidget {
           ),
           const TenSection(notation: Text("#"), name: "预设"),
           TenCardPreset(
-              leading: Image.network(
-                  "http://q1.qlogo.cn/g?b=qq&nk=2436381839&s=100"),
-              title: "TenCardPreset",
-              subtitle: "预设卡片，常用于商品、联系人卡片",
-              trailing: TenButtonBorder(
-                "加购",
-                lefticon: Icon(
-                  Icons.shopping_cart_outlined,
-                  color: TenScheme.primary,
-                ),
-                onTap: () {},
-              )),
-          TenCardPreset2(
               backgorund: Image.network(
                   "https://images.pexels.com/photos/15352968/pexels-photo-15352968.jpeg?auto=compress&cs=tinysrgb&w=400",
                   fit: BoxFit.fill),

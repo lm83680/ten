@@ -30,6 +30,9 @@ class MainApp extends StatelessWidget {
     ]),
     ExampleItem(title: "表单", subItem: [
       ExampleSubItem("From 表单", ExampleFrom()),
+      ExampleSubItem("DescList 描述列表", ExampleDesctionsList()),
+
+      
     ]),
     ExampleItem(title: "容器", subItem: [
       ExampleSubItem("ListItem 横向列表", ExampleListItem()),

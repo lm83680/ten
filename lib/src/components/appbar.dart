@@ -97,6 +97,7 @@ class TenAppBar extends StatelessWidget implements PreferredSizeWidget {
             automaticallyImplyLeading: appBar.automaticallyImplyLeading,
             elevation: appBar.elevation,
             floating: true, // 仅 `SliverAppBar` 有的特性
+            snap: true,// 仅 `SliverAppBar` 有的特性
             centerTitle: appBar.centerTitle,
             backgroundColor: appBar.backgroundColor,
             surfaceTintColor: appBar.surfaceTintColor,
