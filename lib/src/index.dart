@@ -21,3 +21,4 @@ export 'extension/color.dart';
 export 'extension/common.dart';
 export 'tools/common.dart';
 export 'tools/feedback.dart';
+export 'tools/pages.dart';

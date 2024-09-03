@@ -41,7 +41,7 @@ class TenFrom extends StatefulWidget {
       }
     }
     if (errorIndex.isNotEmpty && autoTip == true) {
-      if (context == null) throw "autoTip == true && context==null , error";
+      if (context == null) throw ArgumentError("autoTip == true && context==null , error");
       TenFeedBack.showTenSnackbar(context, "校验失败",
           message: errorIndex.map((rule) {
             return rule.desction ?? '[${rule.key}]校验不通过';
