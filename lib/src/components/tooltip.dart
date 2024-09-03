@@ -96,16 +96,24 @@ class TenToolTip extends StatefulWidget {
       {required this.popKey,
       super.key,
       this.title,
-      required this.message,
-      this.onTap});
+      this.message,
+      this.onTap,
+      this.child,
+      required this.childWidth});
   final GlobalKey popKey;
   final String? title;
-  final String message;
+  final String? message;
   final GestureTapCallback? onTap;
-  static Future<void> showToolTip(context, String message, GlobalKey popKey,
+
+  ///如果你想自己渲染气泡，可以传入此值
+  final Widget? child;
+  final double childWidth;
+  static Future<void> showToolTip(context, GlobalKey popKey,
       {String? title,
+      String? message,
       GestureTapCallback? onTap,
-      Offset? offset}) async {
+      Widget? child,
+      double childWidth = 120}) async {
     assert(popKey.currentContext != null &&
         popKey.currentContext!.findRenderObject() != null);
     if (popKey.currentContext == null ||
@@ -118,6 +126,8 @@ class TenToolTip extends StatefulWidget {
           message: message,
           onTap: onTap,
           popKey: popKey,
+          childWidth: childWidth,
+          child: child,
         )));
   }
 
@@ -202,6 +212,29 @@ class _TenToolTipState extends State<TenToolTip> {
         _screenSize.width - 48,
         _screenSize.height // 全屏幕高度
         );
+    Rect childTipshowRect = Rect.fromLTWH(
+        (_showRect.left +
+            (_showRect.width / 2) -
+            (widget.childWidth / 2)), // 距离屏幕有安全区域
+        isUp
+            ? (_showRect.top - childHeight - 10)
+            : (_showRect.top + _showRect.height + 10), // 向下移动三角形的高度
+        widget.childWidth,
+        _screenSize.height // 全屏幕高度
+        );
+    if (widget.child != null) {
+      //if - 为了节省计算开销
+      //如果子组件的右侧超出了屏幕，把它移回来
+      double needMove = (childTipshowRect.left + widget.childWidth + 16) - _screenSize.width;
+
+      if (needMove > 0) {
+        childTipshowRect = Rect.fromLTWH(
+            childTipshowRect.left - needMove,
+            childTipshowRect.top,
+            childTipshowRect.width,
+            childTipshowRect.height);
+      }
+    }
 
     return Material(
       color: Colors.transparent,
@@ -222,40 +255,52 @@ class _TenToolTipState extends State<TenToolTip> {
                   child: TriangleWidget(
                       isInverted: isUp, color: TenScheme.neutralDark))),
           Positioned.fromRect(
-              rect: tipshowRect,
-              child: GestureDetector(
-                  onTap: widget.onTap ?? () => Navigator.pop(context),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
+              rect: widget.child == null ? tipshowRect : childTipshowRect,
+              child: widget.child != null
+                  ? Column(mainAxisSize: MainAxisSize.min, children: [
                       Container(
                           key: _key,
                           decoration: BoxDecoration(
                             color: TenScheme.neutralDark,
                             borderRadius: BorderRadius.circular(16),
                           ),
-                          padding: const EdgeInsets.all(20),
                           child: SizedBox(
-                            width: double.infinity,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                if (widget.title != null)
-                                  Text(
-                                    widget.title!,
-                                    style: TenScheme.h3
-                                        .copyWith(color: Colors.white),
-                                  ).padding(bottom: 8),
-                                Text(
-                                  widget.message,
-                                  style: TenScheme.desction
-                                      .copyWith(color: Colors.white),
-                                )
-                              ],
+                              width: double.infinity,
+                              child: DefaultTextStyle(
+                                  style: const TextStyle(color: Colors.white),
+                                  child: widget.child!)))
+                    ])
+                  : GestureDetector(
+                      onTap: widget.onTap ?? () => Navigator.pop(context),
+                      child: Column(mainAxisSize: MainAxisSize.min, children: [
+                        Container(
+                            key: _key,
+                            decoration: BoxDecoration(
+                              color: TenScheme.neutralDark,
+                              borderRadius: BorderRadius.circular(16),
                             ),
-                          ))
-                    ],
-                  )))
+                            padding: const EdgeInsets.all(20),
+                            child: SizedBox(
+                              width: double.infinity,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  if (widget.title != null)
+                                    Text(
+                                      widget.title!,
+                                      style: TenScheme.h3
+                                          .copyWith(color: Colors.white),
+                                    ).padding(bottom: 8),
+                                  if (widget.message != null)
+                                    Text(
+                                      widget.message!,
+                                      style: TenScheme.desction
+                                          .copyWith(color: Colors.white),
+                                    )
+                                ],
+                              ),
+                            ))
+                      ])))
         ],
       ).animate().fadeIn(),
     );

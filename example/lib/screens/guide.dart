@@ -21,9 +21,8 @@ class _ExampleGuideState extends State<ExampleGuide> {
       var element = list[i];
       await TenToolTip.showToolTip(
           context,
-          "showToolTip 是一个Future<void> 函数，意味着你可以使用await让程序等待ToolTip被销毁\n${i + 1}/${list.length}",
           element,
-          title: "Hello");
+          title: "Hello",message: "showToolTip 是一个Future<void> 函数，意味着你可以使用await让程序等待ToolTip被销毁\n${i + 1}/${list.length}");
     }
   }
 

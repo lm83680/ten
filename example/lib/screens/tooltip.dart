@@ -14,10 +14,15 @@ class _ExampleTooltipState extends State<ExampleTooltip> {
   final GlobalKey _key3 = GlobalKey();
   final GlobalKey _key4 = GlobalKey();
   void _toggleTooltip(GlobalKey key) {
-    TenToolTip.showToolTip(context, "这是常见使用方法，点击气泡外任意点关闭气泡，点击气泡也能触发对应回调这是常见使用方法，点击气泡外任意点关闭气泡，点击气泡也能触发对应回调", key,
+    TenToolTip.showToolTip(context, key,
+        message: "这是常见使用方法，点击气泡外任意点关闭气泡，点击气泡也能触发对应回调这是常见使用方法，点击气泡外任意点关闭气泡，点击气泡也能触发对应回调",
         title: "一般方法", onTap: () {
       TenFeedBack.showTenSnackbar(context, "点击了气泡");
     });
+  }
+
+  void _toggleTooltipChild() {
+    TenDropDown.showMenu(context, _key4,menus: [TenMenuModel("label", onTap: (){}),TenMenuModel("label222", onTap: (){}),TenMenuModel("label333", onTap: (){})]);
   }
 
   @override
@@ -57,6 +62,10 @@ class _ExampleTooltipState extends State<ExampleTooltip> {
               ).intrinsicWidth(),
             ),
              TenButton(
+                "自定义气泡内容",
+                onTap: () => _toggleTooltipChild(),
+              ).intrinsicWidth(),
+            TenButton(
               "让其他部件打开",
               onTap: () => _toggleTooltip(_key4),
             ).intrinsicWidth(),

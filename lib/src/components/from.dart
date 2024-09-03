@@ -77,7 +77,7 @@ class _TenFromState extends State<TenFrom> {
                 GlobalKey key = GlobalKey();
                 label = GestureDetector(
                   onTap: () => TenToolTip.showToolTip(
-                      context, element.help!, key,
+                      context, key,message: element.help!,
                       title: element.label),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
