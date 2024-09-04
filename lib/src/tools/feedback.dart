@@ -167,22 +167,21 @@ interface class TenFeedBack {
     }
   }
 
-  static Future<void> showTenDialog(BuildContext context,
+  static Future<bool> showTenDialog(BuildContext context,
       {String? title,
       required String message,
       String? cancelText,
       String? confirmText = "确定"}) async {
-    await await Navigator.push(
+    var result = await Navigator.push(
         context,
         TenPopupRoute(
             child: Material(
                 color: Colors.transparent,
                 child: Stack(children: [
                   Positioned.fill(
-                    child: Container(
-                        color: TenScheme.neutralDark.withOpacity(0.22), // 确保透明
-                      )
-                  ),
+                      child: Container(
+                    color: TenScheme.neutralDark.withOpacity(0.22), // 确保透明
+                  )),
                   Center(
                       child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 60),
@@ -197,7 +196,9 @@ interface class TenFeedBack {
                                 children: [
                                   const SizedBox(height: 16),
                                   if (title != null)
-                                    Text(title, style: TenScheme.action).padding(bottom: 8, left: 16, right: 16),
+                                    Text(title, style: TenScheme.action)
+                                        .padding(
+                                            bottom: 8, left: 16, right: 16),
                                   Text(message).padding(left: 16, right: 16),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
@@ -214,11 +215,12 @@ interface class TenFeedBack {
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 24, vertical: 12),
                                       )
-                                    ].withPadding(horizontal: 8,vertical: 8),
+                                    ].withPadding(horizontal: 8, vertical: 8),
                                   )
                                 ],
                               )))),
                 ]))));
+    return result == true;
   }
 }
 
