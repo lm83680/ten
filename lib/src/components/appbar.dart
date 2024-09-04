@@ -29,7 +29,7 @@ class TenAppBar extends StatelessWidget implements PreferredSizeWidget {
       this.action,
       this.autoShowPop = true,
       this.centerTitle = true,
-      this.backgroundColor,
+      this.backgroundColor = const Color(0xffffffff),
       this.sliver,
       this.bottom})
       : preferredSize = Size.fromHeight(bottom==null ? 60 : bottom.preferredSize.height + 60);
@@ -41,7 +41,7 @@ class TenAppBar extends StatelessWidget implements PreferredSizeWidget {
       this.action,
       this.autoShowPop = true,
       this.centerTitle = true,
-      this.backgroundColor,
+      this.backgroundColor = const Color(0xffffffff),
       this.bottom})
       : preferredSize = Size.fromHeight(bottom==null ? 60 : bottom.preferredSize.height + 60),
         sliver = true;

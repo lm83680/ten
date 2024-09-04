@@ -166,4 +166,85 @@ interface class TenFeedBack {
       _loadingEntry = null;
     }
   }
+
+  static Future<void> showTenDialog(BuildContext context,
+      {String? title,
+      required String message,
+      String? cancelText,
+      String? confirmText = "确定"}) async {
+    await await Navigator.push(
+        context,
+        TenPopupRoute(
+            child: Material(
+                color: Colors.transparent,
+                child: Stack(children: [
+                  Positioned.fill(
+                    child: Container(
+                        color: TenScheme.neutralDark.withOpacity(0.22), // 确保透明
+                      )
+                  ),
+                  Center(
+                      child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 60),
+                          child: Container(
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(16)),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const SizedBox(height: 16),
+                                  if (title != null)
+                                    Text(title, style: TenScheme.action).padding(bottom: 8, left: 16, right: 16),
+                                  Text(message).padding(left: 16, right: 16),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      TenButtonText(cancelText ?? "取消",
+                                          onTap: () =>
+                                              Navigator.pop(context, false),
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 24, vertical: 12)),
+                                      TenButtonBorder(
+                                        confirmText ?? "确定",
+                                        onTap: () =>
+                                            Navigator.pop(context, true),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 24, vertical: 12),
+                                      )
+                                    ].withPadding(horizontal: 8,vertical: 8),
+                                  )
+                                ],
+                              )))),
+                ]))));
+  }
+}
+
+class TenDialogRoute extends PopupRoute {
+  final Duration _duration = const Duration(milliseconds: 200);
+  Widget child;
+
+  TenDialogRoute({required this.child});
+
+  @override
+  Color? get barrierColor => null;
+
+  @override
+  bool get barrierDismissible => true;
+
+  @override
+  String? get barrierLabel => null;
+
+  @override
+  Widget buildPage(BuildContext context, Animation<double> animation,
+      Animation<double> secondaryAnimation) {
+    return child;
+  }
+
+  @override
+  Duration get transitionDuration => _duration;
+  @override
+  Duration get reverseTransitionDuration => Duration.zero;
 }
