@@ -43,9 +43,10 @@ class RDeleteModel {
 enum GetMoreResult { ok, error, noMore }
 
 interface class PaginatedDialog {
-  ///预设的确认删除询问框，你可以将其覆盖。
-  static Future<bool> Function(BuildContext context) showDeleteDialog =
-      (BuildContext context) async {
+  ///预设的确认删除询问框，你可以将其覆盖。如果未覆盖，务必传入context
+  static Future<bool> Function(BuildContext? context) showDeleteDialog =
+      (BuildContext? context) async {
+    if(context==null) throw "未覆盖，且未传入context";
     return await showCupertinoDialog(
       context: context,
       builder: (BuildContext context) {
@@ -71,10 +72,17 @@ interface class PaginatedDialog {
       },
     );
   };
+  ///为什么不使用Ten预设的提醒？ 
+  ///
+  ///因为预设的提醒需要传入context,每次传入又很麻烦不是吗
+  static Future<void> Function() showSuccess = () async {};
+  static Future<void> Function() showError = () async {};
 }
+
 /// 使用方式 ：
 /// 1. 覆盖 PaginatedRequest 配置
-/// 2. 实例 PaginatedCrudState e.g:
+/// 2. 覆盖 PaginatedDialog 配置
+/// 3. 实例 PaginatedCrudState e.g:
 /// late PaginatedCrudState useCrud = PaginatedCrudState(
 ///       options: PaginatedCrudOptions(
 ///            dataListUrl: '/app/page',
@@ -84,6 +92,13 @@ interface class PaginatedDialog {
 class PaginatedCrudState {
   final PaginatedCrudOptions _options;
   final void Function(List) onChange;
+
+  ///你可以将state或者list丢入你的状态管理器中，等待onChange触发数据更新，在树中接受更新值
+  PaginatedCrudOptions get state => _options;
+  int get currentPage => _options.page;
+  List<dynamic> get list => _options.dataList;
+  bool get loading => _options.loading;
+
   PaginatedCrudState(
       {required PaginatedCrudOptions options,
       required Function(List<dynamic>) this.onChange})
@@ -156,13 +171,13 @@ class PaginatedCrudState {
     }
   }
 
-  /// 批量删除  /// 删除完成后会从列表中删除根据deleteKey查找对应的项目,需传入 BuildContext context,
-  void deleteBatchHandle(
-    BuildContext context, {
+  /// 批量删除  删除完成后会从列表中删除根据deleteKey查找对应的项目,如果未覆盖Dialog，务必传入 BuildContext context,
+  Future<void> deleteBatchHandle({
+    BuildContext? context,
     String? key,
     List<String>? keys,
     var deleteKey = "id",
-  }) {
+  }) async {
     if (_options.deleteUrl == null && _options.commonUrl == null) {
       throw ArgumentError('deleteUrl、commonUrl 都不存在');
     }
@@ -172,65 +187,54 @@ class PaginatedCrudState {
     }
 
     List<String> data = keys ?? [key!];
-
-    PaginatedDialog.showDeleteDialog(context).then((_) {
-      if (_) {
-        PaginatedRequest.deleteBatch(_options.deleteUrl ?? _options.commonUrl!,
-                keys: data)
-            .then((value) {
-          _deleteItemForList(key);
-          if (_options.autoShowDeleteResult) {
-            TenFeedBack.showTenSnackbar(context, "操作成功",
-                type: FeedbackOptionType.success());
-          }
-          onChange(_options.dataList);
-        });
+    if (await PaginatedDialog.showDeleteDialog(context)) {
+      await PaginatedRequest.deleteBatch(
+          _options.deleteUrl ?? _options.commonUrl!,
+          keys: data);
+      _deleteItemForList(key);
+      if (_options.autoShowDeleteResult) {
+        PaginatedDialog.showSuccess();
       }
-    });
+      onChange(_options.dataList);
+    }
   }
 
-  /// 新增 , 如果允许自动提醒，需提供 context
-  Future<void> postHandle(Map data, BuildContext? context) async {
+  /// 新增 
+  Future<void> postHandle(Map data) async {
     if (_options.postUrl == null && _options.commonUrl == null) {
       throw ArgumentError('postUrl、commonUrl 都不存在');
     }
-    PaginatedRequest.post(_options.postUrl ?? _options.commonUrl!, data)
-        .then((value) {
-      if (value.isSuccessed) {
-        if (_options.autoShowPostResult) {
-          TenFeedBack.showTenSnackbar(context!, "操作成功",
-              type: FeedbackOptionType.success());
-        }
-        onRefresh();
-      } else {
-        if (_options.autoShowPostResult) {
-          TenFeedBack.showTenSnackbar(context!, "操作失败",
-              type: FeedbackOptionType.error());
-        }
+    RPostModel value = await PaginatedRequest.post(
+        _options.postUrl ?? _options.commonUrl!, data);
+    if (value.isSuccessed) {
+      if (_options.autoShowPostResult) {
+        PaginatedDialog.showSuccess();
       }
-    });
+      onRefresh();
+    } else {
+      if (_options.autoShowPostResult) {
+        PaginatedDialog.showError();
+      }
+    }
   }
 
-  /// 修改 , 如果允许自动提醒，需提供 context
-  Future<void> putHandle(Map data, BuildContext? context) async {
+  /// 修改 
+  Future<void> putHandle(Map data) async {
     if (_options.putUrl == null && _options.commonUrl == null) {
       throw ArgumentError('putUrl、commonUrl 都不存在');
     }
-    PaginatedRequest.put(_options.putUrl ?? _options.commonUrl!, data)
-        .then((value) {
-      if (value.isSuccessed) {
-        if (_options.autoShowPutResult) {
-          TenFeedBack.showTenSnackbar(context!, "操作成功",
-              type: FeedbackOptionType.success());
-        }
-        onRefresh();
-      } else {
-        if (_options.autoShowPutResult) {
-          TenFeedBack.showTenSnackbar(context!, "操作失败",
-              type: FeedbackOptionType.error());
-        }
+    RPutModel value = await PaginatedRequest.put(
+        _options.putUrl ?? _options.commonUrl!, data);
+    if (value.isSuccessed) {
+      if (_options.autoShowPostResult) {
+        PaginatedDialog.showSuccess();
       }
-    });
+      onRefresh();
+    } else {
+      if (_options.autoShowPostResult) {
+        PaginatedDialog.showError();
+      }
+    }
   }
 
   ///清空queryForm
@@ -250,12 +254,6 @@ class PaginatedCrudState {
   void _deleteItemForList(var key) {
     _options.dataList.removeWhere((map) => map.containsKey(key));
   }
-
-  ///你可以将state或者list丢入你的状态管理器中，等待onChange触发数据更新，在树中接受更新值
-  PaginatedCrudOptions get state => _options;
-  int get currentPage => _options.page;
-  List<dynamic> get list => _options.dataList;
-  bool get loading => _options.loading;
 }
 
 class PaginatedCrudOptions {
