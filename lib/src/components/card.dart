@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:ten/ten.dart';
 
 class TenCard extends StatelessWidget {
-  const TenCard({required this.child, this.padding, this.margin, super.key});
+  const TenCard(
+      {required this.child,
+      this.padding,
+      this.margin,
+      super.key,
+      this.backgroundColor,
+      this.borderRadius});
 
   // 命名构造函数
   TenCard.column(
@@ -10,7 +16,9 @@ class TenCard extends StatelessWidget {
       crossAxisAlignment,
       this.padding,
       this.margin,
-      super.key})
+      super.key,
+      this.backgroundColor,
+      this.borderRadius})
       : child = Column(
           crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
@@ -20,6 +28,8 @@ class TenCard extends StatelessWidget {
   final Widget child;
   final EdgeInsets? padding;
   final EdgeInsets? margin;
+  final Color? backgroundColor;
+  final BorderRadius? borderRadius;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -27,7 +37,7 @@ class TenCard extends StatelessWidget {
         child: Ink(
           padding: padding ?? const EdgeInsets.all(16),
           decoration: BoxDecoration(
-              color: Colors.white,
+              color: backgroundColor ?? Colors.white,
               boxShadow: [
                 BoxShadow(
                   color: TenScheme.neutralLight50.withOpacity(0.1), // 阴影颜色
@@ -35,7 +45,7 @@ class TenCard extends StatelessWidget {
                   blurRadius: 6, // 阴影模糊半径
                 ),
               ],
-              borderRadius: BorderRadius.circular(12)),
+              borderRadius: borderRadius ?? BorderRadius.circular(12)),
           child: child,
         ));
   }

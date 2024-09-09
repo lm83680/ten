@@ -21,7 +21,7 @@ interface class PaginatedRequest {
 
 class RGetModel {
   int total;
-  List<Map> list;
+  List list;
   RGetModel({required this.total, required this.list});
 }
 
@@ -83,7 +83,7 @@ interface class PaginatedDialog {
 ///       onChange: (_) => {一般为更新视图操作}));
 class PaginatedCrudState {
   final PaginatedCrudOptions _options;
-  final void Function(List<Map>) onChange;
+  final void Function(List) onChange;
   PaginatedCrudState(
       {required PaginatedCrudOptions options,
       required Function(List<dynamic>) this.onChange})
@@ -284,7 +284,7 @@ class PaginatedCrudOptions {
   Map<String, dynamic>? queryForm;
 
   /// 数据列表
-  List<Map> dataList;
+  List dataList;
 
   /// 排序字段
   String? order;

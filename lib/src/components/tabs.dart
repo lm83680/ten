@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
+import 'package:flutter/material.dart';
 import 'package:ten/style/index.dart';
 
 ///TenTabs 只承担控制TabBar样式 
@@ -8,12 +8,14 @@ class TenTabs extends StatelessWidget implements PreferredSizeWidget {
   const TenTabs({
     super.key,
     required this.tabs,
-    this.isScrollable
+    this.isScrollable,
+    this.controller,
   });
   final List<Widget> tabs;
   final double _kTabHeight = 46.0;
   final double indicatorWeight  = 2.0;
   final bool? isScrollable;
+  final TabController? controller;
   @override
   Size get preferredSize {
     double maxHeight = _kTabHeight;
@@ -31,6 +33,7 @@ class TenTabs extends StatelessWidget implements PreferredSizeWidget {
     bool scrollable = isScrollable!=null ? isScrollable! : (tabs.length > 4 ? true:false);
     return TabBar(
       isScrollable: scrollable,
+      controller: controller,
       unselectedLabelColor: TenScheme.neutralLight,
       labelColor: TenScheme.textLight,
       labelStyle: TenScheme.action,

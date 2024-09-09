@@ -10,8 +10,10 @@ class TenAvatar extends StatelessWidget {
       this.shape = TenAvatarsShape.square,
       this.src,
       this.child,
+      this.backgroundColor,
       super.key});
 
+  final Color? backgroundColor;
   ///Avatar 大小
   final double size;
 
@@ -37,7 +39,7 @@ class TenAvatar extends StatelessWidget {
       child: Container(
         width: size,
         height: size,
-        color: TenScheme.primary300,
+        color: backgroundColor?? TenScheme.primary300,
         child: src != null
             ? Image.network(
                 src!,
