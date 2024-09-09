@@ -186,12 +186,13 @@ class PaginatedCrudState {
       throw ArgumentError('deleteBatchHandle: key 或 keys 二选一');
     }
 
-    List<String> data = keys ?? [key!];
+
     if (await PaginatedDialog.showDeleteDialog(context)) {
+      List<String> data = keys ?? [key!];
       await PaginatedRequest.deleteBatch(
           _options.deleteUrl ?? _options.commonUrl!,
           keys: data);
-      _deleteItemForList(key);
+      _deleteItemForList(data);
       if (_options.autoShowDeleteResult) {
         PaginatedDialog.showSuccess();
       }
@@ -251,8 +252,8 @@ class PaginatedCrudState {
   ///增 和 改 操作不需要此步骤因为 他们会在最前面，调用onRefresh 即可，如果不在最前面，请和后段人员协商
   ///
   ///这个函数不会触发onChange
-  void _deleteItemForList(var key) {
-    _options.dataList.removeWhere((map) => map.containsKey(key));
+  void _deleteItemForList(List<String> keys) {
+  _options.dataList.removeWhere((map) => keys.contains(map[_options.primaryKey].toString()));
   }
 }
 
