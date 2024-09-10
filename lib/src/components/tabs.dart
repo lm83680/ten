@@ -10,12 +10,14 @@ class TenTabs extends StatelessWidget implements PreferredSizeWidget {
     required this.tabs,
     this.isScrollable,
     this.controller,
+    this.onTap
   });
   final List<Widget> tabs;
   final double _kTabHeight = 46.0;
   final double indicatorWeight  = 2.0;
   final bool? isScrollable;
   final TabController? controller;
+  final void Function(int)? onTap;
   @override
   Size get preferredSize {
     double maxHeight = _kTabHeight;
@@ -42,6 +44,7 @@ class TenTabs extends StatelessWidget implements PreferredSizeWidget {
       dividerHeight: 1,
       dividerColor: TenScheme.neutralLight200,
       tabs: tabs,
+      onTap: onTap,
     );
   }
 }

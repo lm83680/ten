@@ -46,7 +46,7 @@ interface class PaginatedDialog {
   ///预设的确认删除询问框，你可以将其覆盖。如果未覆盖，务必传入context
   static Future<bool> Function(BuildContext? context) showDeleteDialog =
       (BuildContext? context) async {
-    if(context==null) throw "未覆盖，且未传入context";
+    if (context == null) throw "未覆盖，且未传入context";
     return await showCupertinoDialog(
       context: context,
       builder: (BuildContext context) {
@@ -72,7 +72,8 @@ interface class PaginatedDialog {
       },
     );
   };
-  ///为什么不使用Ten预设的提醒？ 
+
+  ///为什么不使用Ten预设的提醒？
   ///
   ///因为预设的提醒需要传入context,每次传入又很麻烦不是吗
   static Future<void> Function() showSuccess = () async {};
@@ -186,7 +187,6 @@ class PaginatedCrudState {
       throw ArgumentError('deleteBatchHandle: key 或 keys 二选一');
     }
 
-
     if (await PaginatedDialog.showDeleteDialog(context)) {
       List<String> data = keys ?? [key!];
       await PaginatedRequest.deleteBatch(
@@ -200,7 +200,7 @@ class PaginatedCrudState {
     }
   }
 
-  /// 新增 
+  /// 新增
   Future<void> postHandle(Map data) async {
     if (_options.postUrl == null && _options.commonUrl == null) {
       throw ArgumentError('postUrl、commonUrl 都不存在');
@@ -219,7 +219,7 @@ class PaginatedCrudState {
     }
   }
 
-  /// 修改 
+  /// 修改
   Future<void> putHandle(Map data) async {
     if (_options.putUrl == null && _options.commonUrl == null) {
       throw ArgumentError('putUrl、commonUrl 都不存在');
@@ -238,6 +238,13 @@ class PaginatedCrudState {
     }
   }
 
+  ///修改queryForm 的内容
+  ///
+  ///新内容 = {...?_options.queryForm, ...?map};
+  void onSetQueryForm(Map<String, dynamic>? map) {
+    _options.queryForm = {...?_options.queryForm, ...?map};
+  }
+
   ///清空queryForm
   void reset() {
     if (!valueIsEmpty(_options.queryForm)) {
@@ -253,7 +260,8 @@ class PaginatedCrudState {
   ///
   ///这个函数不会触发onChange
   void _deleteItemForList(List<String> keys) {
-  _options.dataList.removeWhere((map) => keys.contains(map[_options.primaryKey].toString()));
+    _options.dataList.removeWhere(
+        (map) => keys.contains(map[_options.primaryKey].toString()));
   }
 }
 

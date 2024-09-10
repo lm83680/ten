@@ -1,3 +1,8 @@
+## 0.0.7
+
+* 为tabs 添加 ontap , 适配不需要tabsView 的场景
+*  Pages Hook 新增 onSetQueryForm 函数，修改参数更方便
+
 ## 0.0.6
 
 * 修复 from TenFromDefaultLabel 像素溢出的问题
