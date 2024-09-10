@@ -4,14 +4,7 @@ import 'package:ten/ten.dart';
 ///表单
 class TenFrom extends StatefulWidget {
   const TenFrom(
-      {super.key,
-      required this.model,
-      this.labelWidth = 80,
-      this.rules,
-      required this.children});
-
-  ///表单的数据对象
-  final Map<String, dynamic> model;
+      {super.key, this.labelWidth = 80, this.rules, required this.children});
 
   ///标签的长度 default=80 刚好 5个字 或 4个字加上角标
   final double labelWidth;
@@ -23,9 +16,11 @@ class TenFrom extends StatefulWidget {
   @override
   State<TenFrom> createState() => _TenFromState();
 
+  ///校验失败自动显示提示
+  static void Function(String message) formValidateErrorSnackbar = (message) {};
+
   ///校验数据,返回未通过验证的RulesItem
-  static List onValidate(List<RulesItem>? rules, Map<String, dynamic> data,
-      {bool? autoTip, BuildContext? context}) {
+  static List onValidate(List<RulesItem>? rules, Map<String, dynamic> data,{bool? autoTip,}) {
     if (rules == null) return [];
     List<RulesItem> errorIndex = [];
     for (var rule in rules) {
@@ -41,12 +36,9 @@ class TenFrom extends StatefulWidget {
       }
     }
     if (errorIndex.isNotEmpty && autoTip == true) {
-      if (context == null) throw ArgumentError("autoTip == true && context==null , error");
-      TenFeedBack.showTenSnackbar(context, "校验失败",
-          message: errorIndex.map((rule) {
+      formValidateErrorSnackbar(errorIndex.map((rule) {
             return rule.desction ?? '[${rule.key}]校验不通过';
-          }).join('; '),
-          type: FeedbackOptionType.error());
+          }).join('; '));
     }
     return errorIndex;
   }
@@ -76,9 +68,8 @@ class _TenFromState extends State<TenFrom> {
               if (element.help != null) {
                 GlobalKey key = GlobalKey();
                 label = GestureDetector(
-                  onTap: () => TenToolTip.showToolTip(
-                      context, key,message: element.help!,
-                      title: element.label),
+                  onTap: () => TenToolTip.showToolTip(context, key,
+                      message: element.help!, title: element.label),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     key: key,
@@ -185,13 +176,16 @@ class TenFromDefaultLabel extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text(
+              Expanded(
+                  child: Text(
                 text,
+                textAlign: TextAlign.right,
                 style: TenScheme.action
                     .copyWith(color: color ?? TenScheme.primary, height: 1),
-              ).padding(right: 8),
+              )),
               Icon(Icons.navigate_next_rounded,
-                  color: color ?? TenScheme.primary, size: 20)
+                      color: color ?? TenScheme.primary, size: 20)
+                  .padding(left: 8)
             ],
           )),
     );

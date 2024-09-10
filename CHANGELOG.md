@@ -1,4 +1,10 @@
-## 0.0.4
+## 0.0.6
+
+* 修复 from TenFromDefaultLabel 像素溢出的问题
+* 去除无用参数的使用
+* 增加表单验证可覆盖提醒函数，减少对context的需求。
+
+## 0.0.5
 
 * 修复 Pages Hook 删除后key不匹配的异常
 

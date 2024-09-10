@@ -35,7 +35,7 @@ class _ExampleFromState extends State<ExampleFrom> {
   ];
 
   void onSummit() {
-    if (TenFrom.onValidate(rules, model, autoTip: true, context: context)
+    if (TenFrom.onValidate(rules, model, autoTip: true)
         .isEmpty) {
       TenFeedBack.showTenSnackbar(context, "校验通过",
           type: FeedbackOptionType.success());
@@ -49,7 +49,7 @@ class _ExampleFromState extends State<ExampleFrom> {
         body: Column(
           children: [
             TenCard(
-                child: TenFrom(model: model, rules: rules, children: [
+                child: TenFrom(rules: rules, children: [
               TenFromItem(
                   label: "名字",
                   ruleKey: "name",
@@ -171,7 +171,7 @@ class _ExampleFromState extends State<ExampleFrom> {
                   })),
             ])),
             TenCard(
-                child: TenFrom(model: model, children: [
+                child: TenFrom(children: [
               TenFromItem(
                   label: "备注",
                   help: "上下结构，一般仅有多行输入框才会使用,注意，如果使用该参数，建议将另外起一行表单",
@@ -184,7 +184,7 @@ class _ExampleFromState extends State<ExampleFrom> {
                   ))
             ])),
             TenCard(
-                child: TenFrom(model: model, children: [
+                child: TenFrom(children: [
               TenFromItem(
                   label: "单项选择",
                   help: "一般建议在新的卡片里，整体更协调",
