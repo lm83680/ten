@@ -327,7 +327,7 @@ class PaginatedCrudOptions {
       this.queryForm,
       this.dataList = const [],
       this.order,
-      this.asc = true,
+      this.asc = false,
       this.page = 1,
       this.limit = 20,
       this.total = 0,

@@ -85,6 +85,51 @@ interface class TenButtonSheet {
             ));
     if (result != null) onSummit(result);
   }
+
+  ///预设 弹出一个IOS选择器风格的选择器，允许左侧自定义widget
+  static Future<void> selectorPlus(BuildContext context,
+      {required List<TenFromSelectorModel> options,
+      required void Function(TenFromSelectorModel) onSummit,
+      String? desction,
+      required Widget title,
+      dynamic defaultOptionKey}) async {
+    int selectedItem = 0;
+    if (defaultOptionKey != null) {
+      selectedItem = options.indexWhere((item) => item.key == defaultOptionKey);
+    }
+    TenFromSelectorModel? result =
+        await show<TenFromSelectorModel>(context,
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(child: title),
+                    TenButton(
+                      "确认",
+                      onTap: () => Navigator.pop(context, options[selectedItem]),
+                    )
+                  ],
+                ),
+                Expanded(
+                    child: CupertinoPicker(
+                  magnification: 1.22,
+                  useMagnifier: true,
+                  itemExtent: 40,
+                  scrollController:
+                      FixedExtentScrollController(initialItem: selectedItem),
+                  onSelectedItemChanged: (int index) => selectedItem = index,
+                  children: List<Widget>.generate(options.length, (int index) {
+                    return Center(
+                        child: Text(
+                      options[index].value,
+                      style: TenScheme.h3,
+                    ));
+                  }),
+                ))
+              ],
+            ));
+    if (result != null) onSummit(result);
+  }
 }
 
 

@@ -1,3 +1,8 @@
+## 0.0.8
+
+*  解锁弹出选择器窗口头部自定义
+*  Pages Hook 改变默认升序为false
+
 ## 0.0.7
 
 * 为tabs 添加 ontap , 适配不需要tabsView 的场景
