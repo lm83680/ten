@@ -1,6 +1,6 @@
 name: ten
 description: "A set of Flutter component libraries based on UX-first principles"
-version: 0.0.8
+version: 0.0.9
 homepage: https://github.com/lm83680/ten
 
 environment:
@@ -11,6 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_animate: ^4.5.0
+  cached_network_image: ^3.4.0 #缓存网络图像图片
 
 dev_dependencies:
   flutter_test:

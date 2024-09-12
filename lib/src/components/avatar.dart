@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:ten/style/index.dart';
 
@@ -14,6 +15,7 @@ class TenAvatar extends StatelessWidget {
       super.key});
 
   final Color? backgroundColor;
+
   ///Avatar 大小
   final double size;
 
@@ -34,18 +36,21 @@ class TenAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(
-         (shape == TenAvatarsShape.circle ? size / 2 : size / 8),
+        (shape == TenAvatarsShape.circle ? size / 2 : size / 8),
       ),
       child: Container(
         width: size,
         height: size,
-        color: backgroundColor?? TenScheme.primary300,
+        color: backgroundColor ?? TenScheme.primary300,
         child: src != null
-            ? Image.network(
-                src!,
-                width: size,
-                height: size,
-                fit: BoxFit.cover,
+            ? CachedNetworkImage(
+                imageUrl: src!,
+                imageBuilder: (context, imageProvider) => Image(
+                    image: imageProvider,
+                    fit: BoxFit.cover,
+                    width: size,
+                    height: size,
+                  ),
               )
             : child,
       ),
