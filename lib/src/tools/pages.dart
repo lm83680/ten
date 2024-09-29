@@ -173,7 +173,7 @@ class PaginatedCrudState {
   }
 
   /// 批量删除  删除完成后会从列表中删除根据deleteKey查找对应的项目,如果未覆盖Dialog，务必传入 BuildContext context,
-  Future<void> deleteBatchHandle({
+  Future<bool> deleteBatchHandle({
     BuildContext? context,
     String? key,
     List<String>? keys,
@@ -197,7 +197,9 @@ class PaginatedCrudState {
         PaginatedDialog.showSuccess();
       }
       onChange(_options.dataList);
+      return true;
     }
+    return false;
   }
 
   /// 新增

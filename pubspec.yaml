@@ -1,6 +1,6 @@
 name: ten
 description: "A set of Flutter component libraries based on UX-first principles"
-version: 0.0.9
+version: 0.0.11
 homepage: https://github.com/lm83680/ten
 
 environment:

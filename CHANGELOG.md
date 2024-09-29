@@ -1,34 +1,42 @@
+## 0.0.11
+
+* Add canCopy for TenDesctionsList
+
+## 0.0.10
+
+* Fix page deletion callback
+
+## 0.0.9
+
+* Introduced avatar part caching plug-in
+
 ## 0.0.8
 
-*  引入头像部件缓存插件
-
-## 0.0.8
-
-*  解锁弹出选择器窗口头部自定义
-*  Pages Hook 改变默认升序为false
+* Unlock popup selector window header customization
+* Pages Hook changes the default ascending order to false
 
 ## 0.0.7
 
-* 为tabs 添加 ontap , 适配不需要tabsView 的场景
-*  Pages Hook 新增 onSetQueryForm 函数，修改参数更方便
+* Add ontap for tabs to adapt to scenarios that do not require tabsView
+* Pages Hook adds onSetQueryForm function to make it easier to modify parameters
 
 ## 0.0.6
 
-* 修复 from TenFromDefaultLabel 像素溢出的问题
-* 去除无用参数的使用
-* 增加表单验证可覆盖提醒函数，减少对context的需求。
+* Fix the problem of pixel overflow from TenFromDefaultLabel
+* Remove the use of useless parameters
+* Add form validation to override the reminder function and reduce the need for context.
 
 ## 0.0.5
 
-* 修复 Pages Hook 删除后key不匹配的异常
+* Fixed key mismatch exception after Pages Hook is deleted
 
 ## 0.0.4
 
-* 完善了Pages Hook，适配更多场景
+* Improved Pages Hook to adapt to more scenarios
 
 ## 0.0.3
 
-* 增加avatar 自定义背景 、card 自定义背景、自定义圆角；tabs 新增控制器
+* Added avatar custom background, card custom background, custom rounded corners; new tabs controller
 
 ## 0.0.2
 
